@@ -28,7 +28,7 @@ jobs:
       run: dnf install -y python3
 
     - name: Install tox
-      run: python3 -m pip install tox
+      run: python3 -m pip install tox mock netaddr 
 
     - name: Run check
       run: make check
