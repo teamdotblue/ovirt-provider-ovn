@@ -25,7 +25,7 @@ from functools import wraps
 from netaddr import AddrFormatError
 from netaddr import EUI
 from netaddr import IPNetwork
-import six
+
 
 import constants as ovnconst
 import neutron.constants as neutron_constants
@@ -92,8 +92,7 @@ class SecurityGroupRule(object):
         return SecurityGroupRule.default_group_id
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Mapper(object):
+class Mapper(abc.ABCMeta):
 
     REST_TENANT_ID = 'tenant_id'
     REST_PROJECT_ID = 'project_id'
@@ -619,7 +618,7 @@ class SubnetMapper(Mapper):
     }
 
     ovn_ipv6_address_mode = {
-        v: k for k, v in six.iteritems(rest_ipv6_address_mode)
+        v: k for k, v in rest_ipv6_address_mode.items()
     }
 
     # allow raw OVN values on OpenStack API for backward compatibility

@@ -1,56 +1,40 @@
 name: CI
 on:
   push:
-    branches:
-      - master
-      - ovirt-4.4
+    branches: [master, ovirt-4.4, centos10-upgrade]
   pull_request:
+
 env:
   EXPORT_DIR: exported-artifacts
 jobs:
   check:
     runs-on: ubuntu-latest
-    container: quay.io/ovirt/ovirt-provider-ovn-tests:${{ matrix.tag }}
+    name: check and test ${{ matrix.tag }}
     strategy:
+      fail-fast: false
       matrix:
-        tag: [ centos-8, centos-9 ]
+        include:
+          - tag: centos-9
+            container-name: el9stream
+          - tag: centos-10
+            container-name: el10stream
+    container:
+      image: quay.io/ovirt/buildcontainer:${{ matrix.container-name }}
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout sources
+      uses: actions/checkout@v4
+
     - name: Run check
       run: make check
 
-  unit-tests:
-    runs-on: ubuntu-latest
-    container: quay.io/ovirt/ovirt-provider-ovn-tests:${{ matrix.tag }}
-    strategy:
-      matrix:
-        tag: [ centos-8, centos-9 ]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run unit tests
-        run: make unittest
+    - name: Run unit tests
+      run: make unittest
 
-  lint:
-    runs-on: ubuntu-latest
-    container: quay.io/ovirt/ovirt-provider-ovn-tests:${{ matrix.tag }}
-    strategy:
-      matrix:
-        tag: [ centos-8, centos-9 ]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run lint
-        run: make lint
+    - name: run lint
+      run: make lint
 
-  coverage:
-    runs-on: ubuntu-latest
-    container: quay.io/ovirt/ovirt-provider-ovn-tests:${{ matrix.tag }}
-    strategy:
-      matrix:
-        tag: [ centos-8, centos-9 ]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run coverage
-        run: make coverage
+    - name: run coverage
+      run: make coverage
 
   integration-tests:
     env:
@@ -59,9 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: [ centos-8, centos-9 ]
+        tag: [ centos-9, centos-10 ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           sudo apt update
@@ -70,7 +54,7 @@ jobs:
           sudo python3 -m pip install tox
       - name: Run itegration tests
         run: sudo -E ./automation/create_it_env.sh
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: ${{ failure() }}
         with:
           name: ovirt-provider-ovn-integ-tests-${{ matrix.tag }}
@@ -79,19 +63,21 @@ jobs:
 
   rpm:
     runs-on: ubuntu-latest
-    name: rpm-${{ matrix.distro }}
-    container: quay.io/ovirt/ovirt-provider-ovn-tests:${{ matrix.tag }}
+    name: rpm-${{ matrix.tag }}
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - distro: el8stream
-            tag: centos-8
-          - distro: el9stream
-            tag: centos-9
+          - tag: centos-9
+            container-name: el9stream
+          - tag: centos-10
+            container-name: el10stream
+
+    container: quay.io/ovirt/buildcontainer:${{ matrix.container-name }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build RPMs
       run: ./automation/rpm.sh
-    - uses: ovirt/upload-rpms-action@v2
+    - uses: ovirt/upload-rpms-action@v4
       with:
         directory: ${{ env.EXPORT_DIR }}

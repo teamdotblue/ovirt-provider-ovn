@@ -29,7 +29,6 @@ RUN dnf -y install yum-plugin-copr \
         python3-requests \
         python3-requests-mock \
         python3-setuptools \
-        python3-six \
         rpm-build \
     && \
     dnf clean all

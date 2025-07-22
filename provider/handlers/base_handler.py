@@ -21,11 +21,11 @@ from __future__ import absolute_import
 import abc
 import json as libjson
 import logging
-import six
+import urllib
+import urllib.parse
+import http.client
 
-from six.moves.BaseHTTPServer import BaseHTTPRequestHandler
-from six.moves import http_client
-from six.moves import urllib_parse
+from http.server import BaseHTTPRequestHandler
 
 from auth import BadGateway
 from auth import Forbidden
@@ -84,10 +84,7 @@ class BaseHandler(BaseHTTPRequestHandler):
 
     # Suppress static error message of BaseHTTPRequestHandler, because a
     # the individual error message ERROR_MESSAGE is sent.
-    if six.PY2:
-        error_message_format = ''
-    else:
-        error_message_format = ERROR_MESSAGE
+    error_message_format = ERROR_MESSAGE
     error_content_type = ERROR_CONTENT_TYPE
 
     # TODO: this is made configurable in a later patch
@@ -99,20 +96,20 @@ class BaseHandler(BaseHTTPRequestHandler):
         BaseHTTPRequestHandler.__init__(self, request, client_address, server)
 
     def do_GET(self):
-        self._handle_request(GET, code=http_client.OK)
+        self._handle_request(GET, code=http.client.OK)
 
     def do_POST(self):
         self._handle_request(
-            POST, content=self._get_content(), code=http_client.CREATED
+            POST, content=self._get_content(), code=http.client.CREATED
         )
 
     def do_PUT(self):
         self._handle_request(
-            PUT, content=self._get_content(), code=http_client.OK
+            PUT, content=self._get_content(), code=http.client.OK
         )
 
     def do_DELETE(self):
-        self._handle_request(DELETE, code=http_client.NO_CONTENT)
+        self._handle_request(DELETE, code=http.client.NO_CONTENT)
 
     def _format_content_for_log(self, method, path, content):
         return content
@@ -135,7 +132,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 ),
             )
 
-    def _handle_request(self, method, code=http_client.OK, content=None):
+    def _handle_request(self, method, code=http.client.OK, content=None):
         self._log_request(method, self.path, content)
         try:
             path_parts, query = self._parse_request_path(self.path)
@@ -156,7 +153,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 self.path,
                 content,
                 message=message,
-                response_code=http_client.NOT_FOUND,
+                response_code=http.client.NOT_FOUND,
             )
         except ElementNotFoundError as e:
             message = 'The element requested has not been found.'
@@ -166,7 +163,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 self.path,
                 content,
                 message=message,
-                response_code=http_client.NOT_FOUND,
+                response_code=http.client.NOT_FOUND,
             )
         except MethodNotAllowedError as e:
             message = 'Method not allowed: {}'.format(method)
@@ -176,7 +173,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 self.path,
                 content,
                 message=message,
-                response_code=http_client.METHOD_NOT_ALLOWED,
+                response_code=http.client.METHOD_NOT_ALLOWED,
             )
         except BadRequestError as e:
             self._handle_response_exception(
@@ -184,7 +181,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.BAD_REQUEST,
+                response_code=http.client.BAD_REQUEST,
             )
         except Unauthorized as e:
             self._handle_response_exception(
@@ -192,7 +189,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.UNAUTHORIZED,
+                response_code=http.client.UNAUTHORIZED,
             )
         except Forbidden as e:
             self._handle_response_exception(
@@ -200,7 +197,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.FORBIDDEN,
+                response_code=http.client.FORBIDDEN,
             )
         except Timeout as e:
             self._handle_response_exception(
@@ -208,7 +205,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.GATEWAY_TIMEOUT,
+                response_code=http.client.GATEWAY_TIMEOUT,
             )
         except BadGateway as e:
             self._handle_response_exception(
@@ -216,7 +213,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.BAD_GATEWAY,
+                response_code=http.client.BAD_GATEWAY,
             )
         except ConflictError as e:
             self._handle_response_exception(
@@ -224,7 +221,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.CONFLICT,
+                response_code=http.client.CONFLICT,
             )
         except NotImplementedError as e:
             self._handle_response_exception(
@@ -232,7 +229,7 @@ class BaseHandler(BaseHTTPRequestHandler):
                 method,
                 self.path,
                 content,
-                response_code=http_client.NOT_IMPLEMENTED,
+                response_code=http.client.NOT_IMPLEMENTED,
             )
         except Exception as e:
             self._handle_response_exception(e, method, self.path, content)
@@ -273,33 +270,20 @@ class BaseHandler(BaseHTTPRequestHandler):
         path,
         content=None,
         message=None,
-        response_code=http_client.INTERNAL_SERVER_ERROR,
+        response_code=http.client.INTERNAL_SERVER_ERROR,
     ):
         self._log_request(method, path, content, log_level=logging.ERROR)
         error_message = str(e) or message or ''
         logging.exception(error_message)
         explain = libjson.dumps(error_message)
-        if six.PY2:
-            self.send_error(response_code)
-            self.wfile.write(
-                (
-                    ERROR_MESSAGE
-                    % {
-                        'code': response_code,
-                        'explain': explain,
-                        'message': http_client.responses[response_code],
-                    }
-                ).encode()
-            )
-        else:
-            self.send_error(
-                response_code, explain=explain
-            )  # pylint: disable=E1123
+        self.send_error(
+            response_code, explain=explain
+        )  # pylint: disable=E1123
 
     @staticmethod
     def _parse_request_path(full_path):
-        parsed_path = urllib_parse.urlparse(full_path)
-        query = urllib_parse.parse_qs(parsed_path.query)
+        parsed_path = urllib.parse.urlparse(full_path)
+        query = urllib.parse.parse_qs(parsed_path.query)
         query_path = BaseHandler._remove_json_extension(parsed_path.path)
         elements = list(filter(None, query_path.split('/')))[1:]
         if not elements:

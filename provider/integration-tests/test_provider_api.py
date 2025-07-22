@@ -21,7 +21,7 @@ import contextlib
 import json
 
 import pytest
-import six.moves.http_client as http_client
+import http.client
 import requests
 
 from lib.api_lib import update_and_assert
@@ -323,7 +323,7 @@ class TestSecurityGroupsApi(object):
 
 
 def test_not_found_escape():
-    conn = http_client.HTTPConnection(ENDPOINT_HOST)
+    conn = http.client.HTTPConnection(ENDPOINT_HOST)
     conn.request(
         'GET', ENDPOINT_PATH + 'xxx../","message":"<injected_message>'
     )

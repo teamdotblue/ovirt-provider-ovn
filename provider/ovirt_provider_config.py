@@ -20,7 +20,7 @@ from __future__ import absolute_import
 
 import glob
 import os
-from six.moves import configparser
+import configparser
 
 
 CONFIG_FILE = '/etc/ovirt-provider-ovn/ovirt-provider-ovn.conf'

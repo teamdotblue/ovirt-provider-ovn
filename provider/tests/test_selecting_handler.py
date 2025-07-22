@@ -17,8 +17,8 @@
 # Refer to the README and COPYING files for full details of the license
 from __future__ import absolute_import
 
+import urllib
 import pytest
-import six
 
 from handlers.selecting_handler import RESPONSE_VALUE_KEY
 from handlers.selecting_handler import RESPONSE_VALUE_PARAMETER
@@ -76,7 +76,7 @@ class TestSelectingHandler(object):
 
         url = 'http://localhost:8080/v2.0/test4/11/test5/12'
         elements = list(
-            filter(None, six.moves.urllib_parse.urlparse(url).path.split('/'))
+            filter(None, urllib.parse.urlparse(url).path.split('/'))
         )[1:]
         handler, params = SelectingHandler.get_response_handler(
             response_handlers, 'TEST3', elements
