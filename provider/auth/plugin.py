@@ -21,7 +21,7 @@ from __future__ import absolute_import
 import abc
 
 
-class Plugin(abc.ABCMeta):
+class Plugin(abc.ABC):
     @abc.abstractmethod
     def create_token(self, user_at_domain, user_password):
         """Create a new token and return it."""
