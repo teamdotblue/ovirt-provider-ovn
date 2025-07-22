@@ -617,9 +617,7 @@ class SubnetMapper(Mapper):
         OVN_DHCPV6_STATELESS: IPV6_ADDRESS_MODE_STATELESS,
     }
 
-    ovn_ipv6_address_mode = {
-        v: k for k, v in rest_ipv6_address_mode.items()
-    }
+    ovn_ipv6_address_mode = { v: k for k, v in rest_ipv6_address_mode.items() }
 
     # allow raw OVN values on OpenStack API for backward compatibility
     ovn_ipv6_address_mode.update(
