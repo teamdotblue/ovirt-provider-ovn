@@ -24,6 +24,12 @@ jobs:
     - name: Checkout sources
       uses: actions/checkout@v4
 
+    - name: Install dependencies
+      run: dnf install -y python3
+
+    - name: Install tox
+      run: python3 -m pip install --upgrade pip && python3 -m pip install tox
+
     - name: Run check
       run: make check
 
@@ -78,6 +84,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build RPMs
       run: ./automation/rpm.sh
-    - uses: ovirt/upload-rpms-action@v4
+    - uses: ovirt/upload-rpms-action@main
       with:
         directory: ${{ env.EXPORT_DIR }}
