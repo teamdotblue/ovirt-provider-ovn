@@ -28,7 +28,7 @@ jobs:
       run: dnf install -y python3
 
     - name: Install tox
-      run: python3 -m pip install tox mock netaddr 
+      run: python3 -m pip install tox mock netaddr ovsdbapp
 
     - name: Run check
       run: make check
@@ -56,7 +56,7 @@ jobs:
         run: |
           apt update
           apt install podman python3-pip
-          python3 -m pip install tox ovsdbapp
+          python3 -m pip install tox mock netaddr ovsdbapp
       - name: Run itegration tests
         run: sudo -E ./automation/create_it_env.sh
       - uses: actions/upload-artifact@v4
