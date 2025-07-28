@@ -101,9 +101,7 @@ class TestOvirtSso(object):
             )
 
     def test_create_token_timeout(self, requests_mock):
-        requests_mock.register_uri(
-            "POST", TOKEN_URL, exc=ConnectTimeout
-        )
+        requests_mock.register_uri("POST", TOKEN_URL, exc=ConnectTimeout)
         with pytest.raises(Timeout):
             create_token(
                 username=NOT_RELEVANT,

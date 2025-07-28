@@ -112,8 +112,9 @@ class OvnPortRow(OvnRow):
     ):
         self.uuid = uuid
         self.name = name
-        self.external_ids = external_ids \
-            or {PortMapper.OVN_DEVICE_ID: device_id}
+        self.external_ids = external_ids or {
+            PortMapper.OVN_DEVICE_ID: device_id
+        }
         self.dhcpv4_options = None
         self.dhcpv6_options = None
         self.addresses = addresses or ["unknown"]
@@ -140,7 +141,8 @@ def assert_port_equal(rest_data, port):
     )
     assert rest_data.get("mac_address") == get_port_mac(port.lsp)
     assert rest_data.get("port_security_enabled") == (
-        len(port.lsp.port_security) > 0)
+        len(port.lsp.port_security) > 0
+    )
 
 
 class OvnSubnetRow(OvnRow):
@@ -469,11 +471,7 @@ class PortApiInputMaker(ApiInputMaker):
 
 class SecurityGroupApiInputMaker(ApiInputMaker):
     def __init__(
-        self,
-        name,
-        tenant_id=None,
-        project_id=None,
-        description=None
+        self, name, tenant_id=None, project_id=None, description=None
     ):
         self._name = (SecurityGroupMapper.REST_SEC_GROUP_NAME, name)
         self._description = (
