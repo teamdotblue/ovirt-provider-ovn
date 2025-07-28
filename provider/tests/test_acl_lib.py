@@ -87,13 +87,15 @@ def test_acl_port_matches():
 def test_create_acl_match():
     pg_id = uuid.UUID(int=100)
     assert create_acl_match(
-        "ingress", "IPv4", None, None, None, "tcp", pg_id) == [
+        "ingress", "IPv4", None, None, None, "tcp", pg_id
+    ) == [
         "outport == @00000000-0000-0000-0000-000000000064",
         "ip4",
         "tcp",
     ]
     assert create_acl_match(
-        "ingress", "IPv4", None, 5000, 5299, "tcp", pg_id) == [
+        "ingress", "IPv4", None, 5000, 5299, "tcp", pg_id
+    ) == [
         "outport == @00000000-0000-0000-0000-000000000064",
         "ip4",
         "tcp",

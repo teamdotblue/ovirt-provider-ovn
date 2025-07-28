@@ -176,7 +176,8 @@ def assert_subnet_equal(actual, subnet_row):
     assert actual["id"] == str(subnet_row.uuid)
     assert actual["cidr"] == subnet_row.cidr
     assert actual.get("name") == subnet_row.external_ids.get(
-        SubnetMapper.OVN_NAME)
+        SubnetMapper.OVN_NAME
+    )
     assert actual["network_id"] == subnet_row.external_ids.get(
         SubnetMapper.OVN_NETWORK_ID
     )
@@ -189,7 +190,8 @@ def assert_subnet_equal(actual, subnet_row):
     if actual_dns_nameservers or ovn_dns_server:
         assert actual_dns_nameservers == ovn_dns_server
     assert actual.get("gateway_ip") == subnet_row.options.get(
-        SubnetMapper.OVN_GATEWAY)
+        SubnetMapper.OVN_GATEWAY
+    )
     assert actual.get("allocation_pools")
 
 
@@ -337,7 +339,8 @@ def assert_security_group_rule_equal(rest_data, security_group_rule):
     assert (
         rest_data[SecurityGroupRuleMapper.REST_SEC_GROUP_RULE_DIRECTION]
         == neutron_constants.OVN_TO_API_DIRECTION_MAPPER[
-            security_group_rule.direction]
+            security_group_rule.direction
+        ]
     )
     assert (
         rest_data[SecurityGroupRuleMapper.REST_SEC_GROUP_RULE_SEC_GROUP_ID]
@@ -382,8 +385,7 @@ class ApiInputMaker(object):
         :return: a dict with all the non-null attributes key-value pairs
         """
         return {
-            v[0]: v[1] for (_, v) in self.__dict__.items()
-            if v[1] is not None
+            v[0]: v[1] for (_, v) in self.__dict__.items() if v[1] is not None
         }
 
 
@@ -467,7 +469,8 @@ class PortApiInputMaker(ApiInputMaker):
 
 class SecurityGroupApiInputMaker(ApiInputMaker):
     def __init__(
-            self, name, tenant_id=None, project_id=None, description=None):
+            self, name, tenant_id=None, project_id=None, description=None
+        ):
         self._name = (SecurityGroupMapper.REST_SEC_GROUP_NAME, name)
         self._description = (
             SecurityGroupMapper.REST_SEC_GROUP_NAME,

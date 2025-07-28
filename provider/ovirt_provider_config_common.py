@@ -17,8 +17,8 @@
 # Refer to the README and COPYING files for full details of the license
 from __future__ import absolute_import
 
-import provider.ovirt_provider_config \
-    as ovirt_provider_config
+import provider.ovirt_provider_config
+
 from provider.ovirt_provider_config import (
     CONFIG_SECTION_AUTH,
     CONFIG_SECTION_DHCP,
@@ -95,37 +95,37 @@ NOVA_VERSION = 'v2.1/'
 
 
 def neturon_port():
-    return ovirt_provider_config.getint(
+    return provider.ovirt_provider_config.getint(
         CONFIG_SECTION_PROVIDER, KEY_NEUTRON_PORT, DEFAULT_NEUTRON_PORT
     )
 
 
 def keystone_port():
-    return ovirt_provider_config.getint(
+    return provider.ovirt_provider_config.getint(
         CONFIG_SECTION_PROVIDER, KEY_KEYSTONE_PORT, DEFAULT_KEYSTONE_PORT
     )
 
 
 def nova_port():
-    return ovirt_provider_config.getint(
+    return provider.ovirt_provider_config.getint(
         CONFIG_SECTION_PROVIDER, KEY_NOVA_PORT, DEFAULT_NOVA_PORT
     )
 
 
 def provider_host():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER, KEY_PROVIDER_HOST, DEFAULT_PROVIDER_HOST
     )
 
 
 def openstack_region():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER, KEY_OPENSTACK_REGION, DEFAULT_OPENSTACK_REGION
     )
 
 
 def openstack_neutron_id():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER,
         KEY_OPENSTACK_NEUTRON_ID,
         DEFAULT_OPENSTACK_NEUTRON_ID,
@@ -133,7 +133,7 @@ def openstack_neutron_id():
 
 
 def openstack_keystone_id():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER,
         KEY_OPENSTACK_KEYSTONE_ID,
         DEFAULT_OPENSTACK_KEYSTONE_ID,
@@ -141,7 +141,7 @@ def openstack_keystone_id():
 
 
 def tenant_name():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER,
         KEY_OPENSTACK_TENANT_NAME,
         DEFAULT_OPENSTACK_TENANT_NAME,
@@ -149,7 +149,7 @@ def tenant_name():
 
 
 def tenant_description():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER,
         KEY_OPENSTACK_TENANT_DESCRIPTION,
         DEFAULT_OPENSTACK_TENANT_DESCRIPTION,
@@ -193,7 +193,7 @@ def keystone_url_with_version():
 
 
 def tenant_id():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER,
         KEY_OPENSTACK_TENANT_ID,
         DEFAULT_OPENSTACK_TENANT_ID,
@@ -201,37 +201,37 @@ def tenant_id():
 
 
 def ssl_enabled():
-    return ovirt_provider_config.getboolean(
+    return provider.ovirt_provider_config.getboolean(
         CONFIG_SECTION_SSL, KEY_HTTPS_ENABLED, DEFAULT_SSL_ENABLED
     )
 
 
 def ssl_key_file():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_SSL, KEY_SSL_KEY_FILE, DEFAULT_SSL_KEY_FILE
     )
 
 
 def ssl_cert_file():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_SSL, KEY_SSL_CERT_FILE, DEFAULT_SSL_CERT_FILE
     )
 
 
 def ssl_cacert_file():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_SSL, KEY_SSL_CACERT_FILE, DEFAULT_SSL_CERT_FILE
     )
 
 
 def ssl_ciphers_string():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_SSL, KEY_SSL_CIPHERS_STRING, DEFAULT_SSL_CIPHERS_STRING
     )
 
 
 def ovn_remote():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_OVN_REMOTE,
         KEY_OVN_REMOTE,
         DEFAULT_OVN_REMOTE_AT_LOCALHOST,
@@ -239,31 +239,31 @@ def ovn_remote():
 
 
 def dhcp_lease_time():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_DHCP, KEY_DHCP_LEASE_TIME, DEFAULT_DHCP_LEASE_TIME
     )
 
 
 def dhcp_server_mac():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_DHCP, KEY_DHCP_SERVER_MAC, DEFAULT_DHCP_SERVER_MAC
     )
 
 
 def dhcp_enable_mtu():
-    return ovirt_provider_config.getboolean(
+    return provider.ovirt_provider_config.getboolean(
         CONFIG_SECTION_DHCP, KEY_DHCP_ENABLE_MTU, DEFAULT_DHCP_ENABLE_MTU
     )
 
 
 def dhcp_mtu():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_DHCP, KEY_DHCP_MTU, DEFAULT_DHCP_MTU
     )
 
 
 def dhcp_ipv6_address_mode():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_DHCP,
         KEY_DHCP_DEFAULT_IPV6_ADDRESS_MODE,
         DEFAULT_DHCP_DEFAULT_IPV6_ADDRESS_MODE,
@@ -271,13 +271,13 @@ def dhcp_ipv6_address_mode():
 
 
 def auth_plugin():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_AUTH, KEY_AUTH_PLUGIN, DEFAULT_AUTH_PLUGIN
     )
 
 
 def auth_token_timeout():
-    return ovirt_provider_config.getint(
+    return provider.ovirt_provider_config.getint(
         CONFIG_SECTION_AUTH, KEY_AUTH_TOKEN_TIMEOUT, DEFAULT_AUTH_TOKEN_TIMEOUT
     )
 
@@ -288,13 +288,13 @@ def is_ovn_remote_ssl():
 
 
 def ovs_version_29():
-    return ovirt_provider_config.getboolean(
+    return provider.ovirt_provider_config.getboolean(
         CONFIG_SECTION_PROVIDER, KEY_OVS_VERSION_29, DEFAULT_OVS_VERSION_29
     )
 
 
 def max_allowed_mtu():
-    return ovirt_provider_config.getint(
+    return provider.ovirt_provider_config.getint(
         CONFIG_SECTION_VALIDATION,
         KEY_VALIDATION_MAX_ALLOWED_MTU,
         DEFAULT_VALIDATION_MAX_ALLOWED_MTU,
@@ -302,7 +302,7 @@ def max_allowed_mtu():
 
 
 def default_port_security_enabled():
-    return ovirt_provider_config.getboolean(
+    return provider.ovirt_provider_config.getboolean(
         CONFIG_SECTION_NETWORK,
         KEY_NETWORK_PORT_SECURITY_ENABLED,
         DEFAULT_NETWORK_PORT_SECURITY_ENABLED,
@@ -310,7 +310,7 @@ def default_port_security_enabled():
 
 
 def url_filter_exception():
-    return ovirt_provider_config.get(
+    return provider.ovirt_provider_config.get(
         CONFIG_SECTION_PROVIDER,
         KEY_URL_FILTER_EXCEPTION,
         DEFAULT_URL_FILTER_EXCEPTION,

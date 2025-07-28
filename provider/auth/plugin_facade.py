@@ -24,7 +24,8 @@ import provider.auth.core
 def create_token(user_at_domain, user_password):
     provider.auth.core.plugin_loaded()
     return provider.auth.core.plugin.create_token(
-        user_at_domain, user_password)
+        user_at_domain, user_password
+    )
 
 
 def validate_token(token):

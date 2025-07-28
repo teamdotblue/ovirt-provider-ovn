@@ -56,10 +56,7 @@ def test_get_port_ip_router():
 
 
 def test_get_port_ip_empty():
-    assert (
-        get_port_ip(lsp=Lsp(addresses=[], dynamic_addresses=None))
-        is None
-    )
+    assert get_port_ip(lsp=Lsp(addresses=[], dynamic_addresses=None)) is None
 
 
 def test_ip_in_cidr():
@@ -113,9 +110,7 @@ def test_diff_routes_only_new():
 
 def test_diff_routes_only_db():
     route = Route('1.1.2.0/24', '1.1.2.100')
-    assert ({}, {route.ip_prefix: route.nexthop}) == diff_routes(
-        None, [route]
-    )
+    assert ({}, {route.ip_prefix: route.nexthop}) == diff_routes(None, [route])
 
 
 def test_diff_routes_ipv6():
