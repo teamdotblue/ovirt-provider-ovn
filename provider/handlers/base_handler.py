@@ -31,9 +31,16 @@ from provider.auth import BadGateway
 from provider.auth import Forbidden
 from provider.auth import Unauthorized
 from provider.auth import Timeout
-from provider.handlers.query_filter import filter_query_results, should_be_filtered
-from provider.handlers import GET, POST, PUT, DELETE
-
+from provider.handlers.query_filter import (
+    filter_query_results,
+    should_be_filtered,
+)
+from provider.handlers import (
+    GET,
+    POST,
+    PUT,
+    DELETE,
+)
 JSON_SUFFIX = '.json'
 
 ERROR_MESSAGE = """

@@ -163,8 +163,8 @@ class OvnSubnetRow(OvnRow):
             SubnetMapper.OVN_IP_VERSION: str(ip_version),
         }
         self.options = options or {"dns_server": "8.8.8.8"}
-        if "router" not in self.options and ip_version == \
-              SubnetMapper.IP_VERSION_4:
+        if ("router" not in self.options and
+            ip_version == SubnetMapper.IP_VERSION_4):
             self.options["router"] = "1.1.1.1"
 
         self.external_ids[SubnetMapper.OVN_NETWORK_ID] = network_id or "0"
@@ -379,8 +379,10 @@ class ApiInputMaker(object):
         values to None.
         :return: a dict with all the non-null attributes key-value pairs
         """
-        return {v[0]: v[1] for (_, v) in self.__dict__.items()
-                 if v[1] is not None}
+        return {
+            v[0]: v[1] for (_, v) in self.__dict__.items()
+            if v[1] is not None
+        }
 
 
 class NetworkApiInputMaker(ApiInputMaker):
