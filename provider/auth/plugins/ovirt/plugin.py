@@ -18,22 +18,22 @@
 #
 from __future__ import absolute_import
 
-import ovirt_provider_config
+import provider.ovirt_provider_config as ovirt_provider_config
 
-from auth.plugin import Plugin
-from ovirt_provider_config import CONFIG_SECTION_OVIRT
-from ovirt_provider_config import KEY_OVIRT_HOST
-from ovirt_provider_config import KEY_OVIRT_BASE
-from ovirt_provider_config import KEY_OVIRT_CA_FILE
-from ovirt_provider_config import KEY_OVIRT_AUTH_TIMEOUT
-from ovirt_provider_config import KEY_OVIRT_SSO_CLIENT_ID
-from ovirt_provider_config import KEY_OVIRT_SSO_CLIENT_SECRET
-from ovirt_provider_config import DEFAULT_OVIRT_HOST
-from ovirt_provider_config import DEFAULT_OVIRT_BASE
-from ovirt_provider_config import DEFAULT_OVIRT_CA_FILE
-from ovirt_provider_config import DEFAULT_OVIRT_SSO_CLIENT_ID
-from ovirt_provider_config import DEFAULT_OVIRT_SSO_CLIENT_SECRET
-from ovirt_provider_config import DEFAULT_OVIRT_AUTH_TIMEOUT
+from provider.auth.plugin import Plugin
+from provider.ovirt_provider_config import CONFIG_SECTION_OVIRT
+from provider.ovirt_provider_config import KEY_OVIRT_HOST
+from provider.ovirt_provider_config import KEY_OVIRT_BASE
+from provider.ovirt_provider_config import KEY_OVIRT_CA_FILE
+from provider.ovirt_provider_config import KEY_OVIRT_AUTH_TIMEOUT
+from provider.ovirt_provider_config import KEY_OVIRT_SSO_CLIENT_ID
+from provider.ovirt_provider_config import KEY_OVIRT_SSO_CLIENT_SECRET
+from provider.ovirt_provider_config import DEFAULT_OVIRT_HOST
+from provider.ovirt_provider_config import DEFAULT_OVIRT_BASE
+from provider.ovirt_provider_config import DEFAULT_OVIRT_CA_FILE
+from provider.ovirt_provider_config import DEFAULT_OVIRT_SSO_CLIENT_ID
+from provider.ovirt_provider_config import DEFAULT_OVIRT_SSO_CLIENT_SECRET
+from provider.ovirt_provider_config import DEFAULT_OVIRT_AUTH_TIMEOUT
 
 from . import sso
 

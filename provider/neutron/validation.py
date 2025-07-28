@@ -19,16 +19,16 @@
 
 from __future__ import absolute_import
 
-import constants as ovnconst
-import neutron.ip as ip_utils
-from handlers.base_handler import ConflictError
-from handlers.base_handler import BadRequestError
-from handlers.base_handler import ElementNotFoundError
+import provider.constants as ovnconst
+import provider.neutron.ip as ip_utils
+from provider.handlers.base_handler import ConflictError
+from provider.handlers.base_handler import BadRequestError
+from provider.handlers.base_handler import ElementNotFoundError
 
-from neutron.neutron_api_mappers import PortMapper
-from neutron.neutron_api_mappers import SubnetMapper
-from neutron.neutron_api_mappers import RestDataError
-from neutron.neutron_api_mappers import RouterMapper
+from provider.neutron.neutron_api_mappers import PortMapper
+from provider.neutron.neutron_api_mappers import SubnetMapper
+from provider.neutron.neutron_api_mappers import RestDataError
+from provider.neutron.neutron_api_mappers import RouterMapper
 
 
 def attach_network_to_router_by_subnet(subnet, network_id, router_id):

@@ -27,16 +27,12 @@ import http.client
 
 from http.server import BaseHTTPRequestHandler
 
-from auth import BadGateway
-from auth import Forbidden
-from auth import Unauthorized
-from auth import Timeout
-from handlers.query_filter import filter_query_results
-from handlers.query_filter import should_be_filtered
-from handlers import GET
-from handlers import POST
-from handlers import PUT
-from handlers import DELETE
+from provider.auth import BadGateway
+from provider.auth import Forbidden
+from provider.auth import Unauthorized
+from provider.auth import Timeout
+from provider.handlers.query_filter import filter_query_results, should_be_filtered
+from provider.handlers import GET, POST, PUT, DELETE
 
 JSON_SUFFIX = '.json'
 

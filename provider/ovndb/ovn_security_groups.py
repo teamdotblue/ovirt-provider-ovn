@@ -25,15 +25,15 @@ from functools import wraps
 
 from ovsdbapp.backend.ovs_idl.idlutils import RowNotFound
 
-import constants as ovnconst
+import provider.constants as ovnconst
 
-from handlers.base_handler import ElementNotFoundError
+from provider.handlers.base_handler import ElementNotFoundError
 
-import neutron.constants as neutron_constants
-from neutron.neutron_api_mappers import SecurityGroupMapper
+import provider.neutron.constants as neutron_constants
+from provider.neutron.neutron_api_mappers import SecurityGroupMapper
 
-from ovndb.db_set_command import DbSetCommand
-import ovndb.acls as acl_lib
+from provider.ovndb.db_set_command import DbSetCommand
+import provider.ovndb.acls as acl_lib
 
 
 def build_add_acl_command(f):

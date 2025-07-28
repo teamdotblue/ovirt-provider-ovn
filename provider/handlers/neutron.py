@@ -18,12 +18,12 @@
 #
 from __future__ import absolute_import
 
-from auth import validate_token
-from auth import Forbidden
-from auth import TOKEN_HTTP_HEADER_FIELD_NAME
-from handlers.selecting_handler import SelectingHandler
-from handlers.neutron_responses import responses
-from neutron.neutron_api import NeutronApi
+from provider.auth import validate_token
+from provider.auth import Forbidden
+from provider.auth import TOKEN_HTTP_HEADER_FIELD_NAME
+from provider.handlers.selecting_handler import SelectingHandler
+from provider.handlers.neutron_responses import responses
+from provider.neutron.neutron_api import NeutronApi
 
 
 class NeutronHandler(SelectingHandler):

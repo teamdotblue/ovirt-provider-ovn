@@ -27,15 +27,15 @@ from netaddr import EUI
 from netaddr import IPNetwork
 
 
-import constants as ovnconst
-import neutron.constants as neutron_constants
-import neutron.ip as ip_utils
-from ovirt_provider_config_common import dhcp_ipv6_address_mode
-from ovirt_provider_config_common import dhcp_mtu
-from ovirt_provider_config_common import tenant_id
-from ovirt_provider_config_common import max_allowed_mtu
-from handlers.base_handler import MethodNotAllowedError
-from handlers.base_handler import BadRequestError
+import provider.constants as ovnconst
+import provider.neutron.constants as neutron_constants
+import provider.neutron.ip as ip_utils
+from provider.ovirt_provider_config_common import dhcp_ipv6_address_mode
+from provider.ovirt_provider_config_common import dhcp_mtu
+from provider.ovirt_provider_config_common import tenant_id
+from provider.ovirt_provider_config_common import max_allowed_mtu
+from provider.handlers.base_handler import MethodNotAllowedError
+from provider.handlers.base_handler import BadRequestError
 
 
 NetworkPort = namedtuple('NetworkPort', ['lsp', 'ls', 'dhcp_options', 'lrp'])

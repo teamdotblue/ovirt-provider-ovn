@@ -20,7 +20,7 @@ from __future__ import absolute_import
 import mock
 from mock import ANY
 
-from auth.plugins.ovirt import AuthorizationByRole
+from provider.auth.plugins.ovirt import AuthorizationByRole
 
 TOKEN = 'the_secret_token'
 

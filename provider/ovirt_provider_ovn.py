@@ -31,18 +31,18 @@ from http.server import HTTPServer
 
 from ovsdbapp.backend.ovs_idl import vlog
 
-import auth
-import ovirt_provider_config
+import provider.auth as auth
+import provider.ovirt_provider_config as ovirt_provider_config
 import version
 
-from handlers.keystone import TokenHandler
-from handlers.neutron import NeutronHandler
-from ovirt_provider_config_common import ssl_ciphers_string
-from ovirt_provider_config_common import ssl_enabled
-from ovirt_provider_config_common import ssl_key_file
-from ovirt_provider_config_common import ssl_cert_file
-from ovirt_provider_config_common import neturon_port
-from ovirt_provider_config_common import keystone_port
+from provider.handlers.keystone import TokenHandler
+from provider.handlers.neutron import NeutronHandler
+from provider.ovirt_provider_config_common import ssl_ciphers_string
+from provider.ovirt_provider_config_common import ssl_enabled
+from provider.ovirt_provider_config_common import ssl_key_file
+from provider.ovirt_provider_config_common import ssl_cert_file
+from provider.ovirt_provider_config_common import neturon_port
+from provider.ovirt_provider_config_common import keystone_port
 
 
 LOG_CONFIG_FILE = '/etc/ovirt-provider-ovn/logger.conf'

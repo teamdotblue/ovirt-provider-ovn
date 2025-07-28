@@ -21,11 +21,11 @@ import json
 import mock
 import pytest
 
-from handlers.base_handler import BadRequestError
-from handlers.keystone_responses import responses
-from handlers.keystone_responses import TOKENS
-from handlers.base_handler import POST
-from handlers.selecting_handler import SelectingHandler
+from provider.handlers.base_handler import BadRequestError
+from provider.handlers.keystone_responses import responses
+from provider.handlers.keystone_responses import TOKENS
+from provider.handlers.base_handler import POST
+from provider.handlers.selecting_handler import SelectingHandler
 
 NOT_RELEVANT = None
 TOKEN = 'the_secret_token'

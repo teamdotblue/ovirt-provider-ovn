@@ -18,14 +18,14 @@
 #
 from __future__ import absolute_import
 
-import auth.core
+import provider.auth.core
 
 
 def create_token(user_at_domain, user_password):
-    auth.core.plugin_loaded()
-    return auth.core.plugin.create_token(user_at_domain, user_password)
+    provider.auth.core.plugin_loaded()
+    return provider.auth.core.plugin.create_token(user_at_domain, user_password)
 
 
 def validate_token(token):
-    auth.core.plugin_loaded()
-    return auth.core.plugin.validate_token(token)
+    provider.auth.core.plugin_loaded()
+    return provider.auth.core.plugin.validate_token(token)

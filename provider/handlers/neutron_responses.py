@@ -19,15 +19,15 @@ from __future__ import absolute_import
 
 import json
 
-from handlers.base_handler import GET
-from handlers.base_handler import DELETE
-from handlers.base_handler import POST
-from handlers.base_handler import PUT
-from handlers.base_handler import Response
+from provider.handlers.base_handler import GET
+from provider.handlers.base_handler import DELETE
+from provider.handlers.base_handler import POST
+from provider.handlers.base_handler import PUT
+from provider.handlers.base_handler import Response
 
-from handlers.responses_utils import get_entity
-from handlers.selecting_handler import rest
-from ovirt_provider_config_common import neutron_url_with_version
+from provider.handlers.responses_utils import get_entity
+from provider.handlers.selecting_handler import rest
+from provider.ovirt_provider_config_common import neutron_url_with_version
 
 
 NETWORK_ID = 'network_id'

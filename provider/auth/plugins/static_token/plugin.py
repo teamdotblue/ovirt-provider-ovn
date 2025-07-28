@@ -18,7 +18,7 @@
 #
 from __future__ import absolute_import
 
-from auth.plugin import Plugin
+from provider.auth.plugin import Plugin
 
 MAGIC_TOKEN = '00000000000000000000000000000001'
 

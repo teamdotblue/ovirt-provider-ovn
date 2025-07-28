@@ -21,23 +21,23 @@ from __future__ import absolute_import
 
 from ovsdbapp.backend.ovs_idl.idlutils import RowNotFound
 
-import ovn_connection
-import constants as ovnconst
+import provider.ovn_connection as ovn_connection
+import provider.constants as ovnconst
 
-from handlers.base_handler import BadRequestError
-from handlers.base_handler import ElementNotFoundError
+from provider.handlers.base_handler import BadRequestError
+from provider.handlers.base_handler import ElementNotFoundError
 
-import neutron.validation as validate
-from neutron.ip import get_mask_from_subnet
-from neutron.neutron_api_mappers import PortMapper
-from neutron.neutron_api_mappers import SecurityGroupMapper
-from neutron.neutron_api_mappers import SecurityGroupRuleMapper
-from neutron.neutron_api_mappers import SubnetMapper
+import provider.neutron.validation as validate
+from provider.neutron.ip import get_mask_from_subnet
+from provider.neutron.neutron_api_mappers import PortMapper
+from provider.neutron.neutron_api_mappers import SecurityGroupMapper
+from provider.neutron.neutron_api_mappers import SecurityGroupRuleMapper
+from provider.neutron.neutron_api_mappers import SubnetMapper
 
-from ovndb.db_set_command import DbSetCommand
-from ovndb.ovn_security_groups import OvnSecurityGroupApi
-from ovndb.ovn_security_groups import SecurityGroupException
-from ovndb.ovn_security_groups import only_rules_with_allowed_actions
+from provider.ovndb.db_set_command import DbSetCommand
+from provider.ovndb.ovn_security_groups import OvnSecurityGroupApi
+from provider.ovndb.ovn_security_groups import SecurityGroupException
+from provider.ovndb.ovn_security_groups import only_rules_with_allowed_actions
 
 
 def accepts_single_arg(f):

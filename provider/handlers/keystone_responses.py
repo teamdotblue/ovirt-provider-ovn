@@ -21,27 +21,27 @@ from datetime import datetime, timedelta
 
 import http.client
 
-from ovirt_provider_config_common import auth_token_timeout
-from ovirt_provider_config_common import openstack_region
-from ovirt_provider_config_common import openstack_neutron_id
-from ovirt_provider_config_common import openstack_keystone_id
-from ovirt_provider_config_common import tenant_description
-from ovirt_provider_config_common import tenant_name
-from ovirt_provider_config_common import tenant_id
-from ovirt_provider_config_common import keystone_url
-from ovirt_provider_config_common import keystone_url_with_version
-from ovirt_provider_config_common import neutron_url
-from ovirt_provider_config_common import nova_url_with_version
+from provider.ovirt_provider_config_common import auth_token_timeout
+from provider.ovirt_provider_config_common import openstack_region
+from provider.ovirt_provider_config_common import openstack_neutron_id
+from provider.ovirt_provider_config_common import openstack_keystone_id
+from provider.ovirt_provider_config_common import tenant_description
+from provider.ovirt_provider_config_common import tenant_name
+from provider.ovirt_provider_config_common import tenant_id
+from provider.ovirt_provider_config_common import keystone_url
+from provider.ovirt_provider_config_common import keystone_url_with_version
+from provider.ovirt_provider_config_common import neutron_url
+from provider.ovirt_provider_config_common import nova_url_with_version
 
 
-from handlers.base_handler import BadRequestError
-from handlers.base_handler import GET
-from handlers.base_handler import POST
-from handlers.base_handler import Response
-from handlers.responses_utils import get_entity
-from handlers.selecting_handler import rest
+from provider.handlers.base_handler import BadRequestError
+from provider.handlers.base_handler import GET
+from provider.handlers.base_handler import POST
+from provider.handlers.base_handler import Response
+from provider.handlers.responses_utils import get_entity
+from provider.handlers.selecting_handler import rest
 
-import auth
+import provider.auth as auth
 
 
 SSL_CONFIG_SECTION = 'SSL'

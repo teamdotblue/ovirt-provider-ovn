@@ -21,9 +21,9 @@ import logging
 
 import requests
 
-from auth import BadGateway
-from auth import Unauthorized
-from auth import Timeout
+from provider.auth import BadGateway
+from provider.auth import Unauthorized
+from provider.auth import Timeout
 
 AUTH_PATH = '/sso/oauth'
 TOKEN_PATH = '/token'

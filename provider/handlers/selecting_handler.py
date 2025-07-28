@@ -20,9 +20,9 @@ from __future__ import absolute_import
 
 import abc
 
-from handlers.base_handler import BaseHandler
-from handlers.base_handler import PathNotFoundError
-from handlers.base_handler import MethodNotAllowedError
+from provider.handlers.base_handler import BaseHandler
+from provider.handlers.base_handler import PathNotFoundError
+from provider.handlers.base_handler import MethodNotAllowedError
 
 
 PATH_SEPARATOR = '/'

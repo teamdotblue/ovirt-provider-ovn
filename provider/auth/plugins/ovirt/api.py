@@ -20,8 +20,8 @@ from __future__ import absolute_import
 
 import requests
 
-from auth import Forbidden
-from auth import Timeout
+from provider.auth import Forbidden
+from provider.auth import Timeout
 
 API_PATH = '/api'
 HEADERS = {'Accept': 'application/json', 'Content-Type': 'application/json'}

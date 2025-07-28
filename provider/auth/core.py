@@ -21,7 +21,7 @@ from __future__ import absolute_import
 import importlib
 import logging
 
-from ovirt_provider_config_common import auth_plugin
+from provider.ovirt_provider_config_common import auth_plugin
 from .plugin import Plugin
 
 

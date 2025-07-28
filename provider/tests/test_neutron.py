@@ -22,10 +22,9 @@ import json
 import mock
 import http.client
 
-from handlers.base_handler import Response
-from handlers.neutron import NeutronHandler
-
-from handlers.selecting_handler import rest
+from provider.handlers.base_handler import Response
+from provider.handlers.neutron import NeutronHandler
+from provider.handlers.selecting_handler import rest
 
 
 REST_RESPONSE_GET = 'REST_RESPONSE_GET'

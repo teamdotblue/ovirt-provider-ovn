@@ -22,21 +22,27 @@ import json
 import pytest
 from requests.exceptions import ConnectTimeout
 
-from auth.plugins.ovirt import sso
+from provider.auth.plugins.ovirt.sso import (
+    Unauthorized,
+    create_token,
+    get_profiles,
+    get_token_info,
+    Timeout,
+)
 
 NOT_RELEVANT = None
 
-ENGINE_URL = 'http://test.com/ovirt-engine'
-TOKEN_URL = 'http://test.com/ovirt-engine/sso/oauth/token'
-TOKEN_INFO_URL = 'http://test.com/ovirt-engine/sso/oauth/token-info'
-TOKEN = 'the_secret_token'
+ENGINE_URL = "http://test.com/ovirt-engine"
+TOKEN_URL = "http://test.com/ovirt-engine/sso/oauth/token"
+TOKEN_INFO_URL = "http://test.com/ovirt-engine/sso/oauth/token-info"
+TOKEN = "the_secret_token"
 
-TOKEN_RESPONSE_SUCCESS = json.dumps({'access_token': TOKEN})
+TOKEN_RESPONSE_SUCCESS = json.dumps({"access_token": TOKEN})
 
 TOKEN_RESPONSE_AUTH_FAILED = json.dumps(
     {
-        'error_code': 'access_denied',
-        'error': "Cannot authenticate user 'netadmin@internal':"
+        "error_code": "access_denied",
+        "error": "Cannot authenticate user 'netadmin@internal':"
         "Cannot Login. User Account is Disabled or Locked"
         "Please contact your system administrator..",
     }
@@ -44,35 +50,33 @@ TOKEN_RESPONSE_AUTH_FAILED = json.dumps(
 
 PROFILES_LIST_RESPONSE = json.dumps(
     {
-        'result': [
-            'java.util.ArrayList',
+        "result": [
+            "java.util.ArrayList",
             [
                 [
-                    'java.util.HashMap',
-                    {'authz_name': 'internal-authz', 'authn_name': 'internal'},
+                    "java.util.HashMap",
+                    {"authz_name": "internal-authz", "authn_name": "internal"},
                 ]
             ],
         ]
     }
 )
 
-PROFILES = [{'authn_name': 'internal', 'authz_name': 'internal-authz'}]
+PROFILES = [{"authn_name": "internal", "authz_name": "internal-authz"}]
 
 INFO = {
-    'user_id': 'netadmin@internal',
-    'client_id': None,
-    'token_type': 'bearer',
-    'exp': '1490609013000',
-    'active': True,
+    "user_id": "netadmin@internal",
+    "client_id": None,
+    "token_type": "bearer",
+    "exp": "1490609013000",
+    "active": True,
 }
 
 
 class TestOvirtSso(object):
     def test_create_token_success(self, requests_mock):
-        requests_mock.register_uri(
-            'POST', TOKEN_URL, text=TOKEN_RESPONSE_SUCCESS
-        )
-        token = sso.create_token(
+        requests_mock.register_uri("POST", TOKEN_URL, text=TOKEN_RESPONSE_SUCCESS)
+        token = create_token(
             username=NOT_RELEVANT,
             password=NOT_RELEVANT,
             engine_url=ENGINE_URL,
@@ -83,10 +87,10 @@ class TestOvirtSso(object):
 
     def test_create_token_fail(self, requests_mock):
         requests_mock.register_uri(
-            'POST', TOKEN_URL, status_code=400, text=TOKEN_RESPONSE_AUTH_FAILED
+            "POST", TOKEN_URL, status_code=400, text=TOKEN_RESPONSE_AUTH_FAILED
         )
-        with pytest.raises(sso.Unauthorized):
-            sso.create_token(
+        with pytest.raises(Unauthorized):
+            create_token(
                 username=NOT_RELEVANT,
                 password=NOT_RELEVANT,
                 engine_url=ENGINE_URL,
@@ -95,9 +99,9 @@ class TestOvirtSso(object):
             )
 
     def test_create_token_timeout(self, requests_mock):
-        requests_mock.register_uri('POST', TOKEN_URL, exc=ConnectTimeout)
-        with pytest.raises(sso.Timeout):
-            sso.create_token(
+        requests_mock.register_uri("POST", TOKEN_URL, exc=ConnectTimeout)
+        with pytest.raises(Timeout):
+            create_token(
                 username=NOT_RELEVANT,
                 password=NOT_RELEVANT,
                 engine_url=ENGINE_URL,
@@ -106,10 +110,8 @@ class TestOvirtSso(object):
             )
 
     def test_get_profiles(self, requests_mock):
-        requests_mock.register_uri(
-            'POST', TOKEN_INFO_URL, text=PROFILES_LIST_RESPONSE
-        )
-        profiles = sso.get_profiles(
+        requests_mock.register_uri("POST", TOKEN_INFO_URL, text=PROFILES_LIST_RESPONSE)
+        profiles = get_profiles(
             token=TOKEN,
             engine_url=ENGINE_URL,
             ca_file=NOT_RELEVANT,
@@ -120,10 +122,8 @@ class TestOvirtSso(object):
         assert profiles == PROFILES
 
     def test_get_token_info(self, requests_mock):
-        requests_mock.register_uri(
-            'POST', TOKEN_INFO_URL, text=json.dumps(INFO)
-        )
-        info = sso.get_token_info(
+        requests_mock.register_uri("POST", TOKEN_INFO_URL, text=json.dumps(INFO))
+        info = get_token_info(
             token=TOKEN,
             engine_url=ENGINE_URL,
             ca_file=NOT_RELEVANT,

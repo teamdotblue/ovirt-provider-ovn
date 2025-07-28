@@ -22,22 +22,22 @@ from datetime import datetime
 
 import pytest
 
-from constants import LSP_OPTION_NETWORK_NAME
-from ovirt_provider_config_common import tenant_id
+from provider.constants import LSP_OPTION_NETWORK_NAME
+from provider.ovirt_provider_config_common import tenant_id
 
-import neutron.constants as neutron_constants
-from neutron.neutron_api_mappers import Network
-from neutron.neutron_api_mappers import NetworkMapper
-from neutron.neutron_api_mappers import NetworkPort
-from neutron.neutron_api_mappers import PortMapper
-from neutron.neutron_api_mappers import SubnetMapper
-from neutron.neutron_api_mappers import RestDataError
-from neutron.neutron_api_mappers import Router
-from neutron.neutron_api_mappers import RouterMapper
-from neutron.neutron_api_mappers import SecurityGroup
-from neutron.neutron_api_mappers import SecurityGroupRule
-from neutron.neutron_api_mappers import SecurityGroupMapper
-from neutron.neutron_api_mappers import SecurityGroupRuleMapper
+import provider.neutron.constants as neutron_constants
+from provider.neutron.neutron_api_mappers import Network
+from provider.neutron.neutron_api_mappers import NetworkMapper
+from provider.neutron.neutron_api_mappers import NetworkPort
+from provider.neutron.neutron_api_mappers import PortMapper
+from provider.neutron.neutron_api_mappers import SubnetMapper
+from provider.neutron.neutron_api_mappers import RestDataError
+from provider.neutron.neutron_api_mappers import Router
+from provider.neutron.neutron_api_mappers import RouterMapper
+from provider.neutron.neutron_api_mappers import SecurityGroup
+from provider.neutron.neutron_api_mappers import SecurityGroupRule
+from provider.neutron.neutron_api_mappers import SecurityGroupMapper
+from provider.neutron.neutron_api_mappers import SecurityGroupRuleMapper
 
 
 from ovntestlib import assert_network_equal

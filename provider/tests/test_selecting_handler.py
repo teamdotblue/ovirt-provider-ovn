@@ -20,10 +20,10 @@ from __future__ import absolute_import
 import urllib
 import pytest
 
-from handlers.selecting_handler import RESPONSE_VALUE_KEY
-from handlers.selecting_handler import RESPONSE_VALUE_PARAMETER
-from handlers.selecting_handler import rest
-from handlers.selecting_handler import SelectingHandler
+from provider.handlers.selecting_handler import RESPONSE_VALUE_KEY
+from provider.handlers.selecting_handler import RESPONSE_VALUE_PARAMETER
+from provider.handlers.selecting_handler import rest
+from provider.handlers.selecting_handler import SelectingHandler
 
 
 class TestSelectingHandler(object):

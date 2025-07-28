@@ -18,8 +18,8 @@
 #
 
 
-from handlers import GET
-from ovirt_provider_config_common import url_filter_exception
+from provider.handlers import GET
+from provider.ovirt_provider_config_common import url_filter_exception
 
 
 def filter_query_results(items, query):

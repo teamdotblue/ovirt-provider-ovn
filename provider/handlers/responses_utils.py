@@ -20,7 +20,7 @@ from __future__ import absolute_import
 
 import json
 
-from handlers.base_handler import BadRequestError
+from provider.handlers.base_handler import BadRequestError
 
 
 def get_entity(content, entity_name=None):

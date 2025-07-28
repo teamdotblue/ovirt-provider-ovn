@@ -21,12 +21,12 @@ import json
 from mock import MagicMock, ANY
 import mock
 
-from handlers.base_handler import BadRequestError
-from handlers.base_handler import Response
-from handlers.base_handler import Timeout
-from handlers.keystone import TokenHandler
+from provider.handlers.base_handler import BadRequestError
+from provider.handlers.base_handler import Response
+from provider.handlers.base_handler import Timeout
+from provider.handlers.keystone import TokenHandler
 
-from handlers.selecting_handler import rest
+from provider.handlers.selecting_handler import rest
 
 REST_RESPONSE_POST = 'REST_RESPONSE_POST'
 EMPTY = 'EMPTY'

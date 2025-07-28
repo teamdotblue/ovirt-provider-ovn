@@ -20,8 +20,8 @@ from __future__ import absolute_import
 import mock
 import pytest
 
-from auth import init
-from auth.plugin import Plugin
+from provider.auth import init
+from provider.auth.plugin import Plugin
 
 
 class ValidPlugin(Plugin):

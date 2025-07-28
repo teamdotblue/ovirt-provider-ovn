@@ -21,7 +21,7 @@ import mock
 from mock import ANY
 
 
-from auth.plugins.ovirt import AuthorizationByUserName
+from provider.auth.plugins.ovirt import AuthorizationByUserName
 
 TOKEN = 'the_secret_token'
 

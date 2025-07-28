@@ -1,3 +1,9 @@
 netaddr==0.7.19
 ovsdbapp
-requests
+pytest
+requests_mock
+mock
+tox
+ansible-runner
+ansible
+hooking

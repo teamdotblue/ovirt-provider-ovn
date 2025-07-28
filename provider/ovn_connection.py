@@ -27,16 +27,16 @@ from ovsdbapp.backend.ovs_idl.idlutils import RowNotFound
 from ovsdbapp.backend.ovs_idl.transaction import Transaction
 from ovsdbapp.schema.ovn_northbound.impl_idl import OvnNbApiIdlImpl
 
-import constants as ovnconst
+import provider.constants as ovnconst
 
-from handlers.base_handler import BadRequestError
-from handlers.base_handler import ElementNotFoundError
+from provider.handlers.base_handler import BadRequestError
+from provider.handlers.base_handler import ElementNotFoundError
 
-from ovirt_provider_config_common import is_ovn_remote_ssl
-from ovirt_provider_config_common import ovn_remote
-from ovirt_provider_config_common import ssl_key_file
-from ovirt_provider_config_common import ssl_cacert_file
-from ovirt_provider_config_common import ssl_cert_file
+from provider.ovirt_provider_config_common import is_ovn_remote_ssl
+from provider.ovirt_provider_config_common import ovn_remote
+from provider.ovirt_provider_config_common import ssl_key_file
+from provider.ovirt_provider_config_common import ssl_cacert_file
+from provider.ovirt_provider_config_common import ssl_cert_file
 
 _api_impl = None
 

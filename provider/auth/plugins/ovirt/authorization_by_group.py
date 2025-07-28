@@ -18,20 +18,20 @@
 #
 from __future__ import absolute_import
 
-import ovirt_provider_config
+import provider.ovirt_provider_config as ovirt_provider_config
 
-from auth import Unauthorized
+from provider.auth import Unauthorized
 
 from .plugin import OVirtPlugin
 from .sso import extract_groups
 from .sso import get_token_info
 from .sso import is_active
 
-from ovirt_provider_config import CONFIG_SECTION_OVIRT
-from ovirt_provider_config import KEY_OVIRT_ADMIN_GROUP_ATTRIBUTE_NAME
-from ovirt_provider_config import KEY_OVIRT_ADMIN_GROUP_ATTRIBUTE_VALUE
-from ovirt_provider_config import DEFAULT_ENGINE_NETWORK_ADMIN_USER_NAME
-from ovirt_provider_config import DEFAULT_ENGINE_NETWORK_ADMIN_ROLE_ID
+from provider.ovirt_provider_config import CONFIG_SECTION_OVIRT
+from provider.ovirt_provider_config import KEY_OVIRT_ADMIN_GROUP_ATTRIBUTE_NAME
+from provider.ovirt_provider_config import KEY_OVIRT_ADMIN_GROUP_ATTRIBUTE_VALUE
+from provider.ovirt_provider_config import DEFAULT_ENGINE_NETWORK_ADMIN_USER_NAME
+from provider.ovirt_provider_config import DEFAULT_ENGINE_NETWORK_ADMIN_ROLE_ID
 
 
 class AuthorizationByGroup(OVirtPlugin):

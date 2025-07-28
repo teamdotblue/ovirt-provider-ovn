@@ -21,14 +21,13 @@ from __future__ import absolute_import
 
 import random
 
-import constants as ovnconst
-
 from netaddr import valid_ipv4
 from netaddr import valid_ipv6
 from netaddr import IPAddress
 from netaddr import IPNetwork
 from netaddr.core import AddrFormatError
 
+import provider.constants as ovnconst
 
 def get_port_ip(lsp, lrp=None):
     if not lsp.addresses:

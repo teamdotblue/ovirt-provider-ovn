@@ -20,9 +20,9 @@ from __future__ import absolute_import
 
 import binascii
 
-import ovirt_provider_config
+import provider.ovirt_provider_config as ovirt_provider_config
 
-from auth import Unauthorized
+from provider.auth import Unauthorized
 
 from .plugin import OVirtPlugin
 from .sso import get_profiles
@@ -34,9 +34,9 @@ from .sso import get_principal_id
 from .api import search_request
 from .api import follow_link
 
-from ovirt_provider_config import CONFIG_SECTION_OVIRT
-from ovirt_provider_config import KEY_OVIRT_ADMIN_ROLE_ID
-from ovirt_provider_config import DEFAULT_ENGINE_NETWORK_ADMIN_ROLE_ID
+from provider.ovirt_provider_config import CONFIG_SECTION_OVIRT
+from provider.ovirt_provider_config import KEY_OVIRT_ADMIN_ROLE_ID
+from provider.ovirt_provider_config import DEFAULT_ENGINE_NETWORK_ADMIN_ROLE_ID
 
 
 STRING_ENCODING = 'ascii'

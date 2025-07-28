@@ -20,11 +20,11 @@ from __future__ import absolute_import
 
 import uuid
 
-import neutron.constants as neutron_constants
+import provider.neutron.constants as neutron_constants
 
-from neutron.neutron_api_mappers import RestDataError
-from neutron.neutron_api_mappers import SecurityGroupMapper
-from neutron.neutron_api_mappers import SecurityGroupRuleMapper
+from provider.neutron.neutron_api_mappers import RestDataError
+from provider.neutron.neutron_api_mappers import SecurityGroupMapper
+from provider.neutron.neutron_api_mappers import SecurityGroupRuleMapper
 
 
 class ProtocolNotSupported(RestDataError):

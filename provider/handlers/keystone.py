@@ -20,9 +20,9 @@ from __future__ import absolute_import
 
 import json
 
-from handlers.base_handler import POST
-from handlers.selecting_handler import SelectingHandler
-from handlers.keystone_responses import responses
+from provider.handlers.base_handler import POST
+from provider.handlers.selecting_handler import SelectingHandler
+from provider.handlers.keystone_responses import responses
 
 
 class TokenHandler(SelectingHandler):

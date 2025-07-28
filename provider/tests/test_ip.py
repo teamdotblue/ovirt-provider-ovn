@@ -18,7 +18,7 @@
 from __future__ import absolute_import
 
 from collections import namedtuple
-import neutron.ip as ip_utils
+from provider.neutron.ip import get_port_ip, ip_in_cidr, diff_routes
 
 Lsp = namedtuple('Lsp', ['addresses', 'dynamic_addresses'])
 Lrp = namedtuple('Lrp', ['networks'])
@@ -45,11 +45,11 @@ ADDRESS_DATA = [
 
 def test_get_port_ip():
     for expected, address, dynamic in ADDRESS_DATA:
-        assert expected == ip_utils.get_port_ip(Lsp([address], [dynamic]))
+        assert expected == get_port_ip(Lsp([address], [dynamic]))
 
 
 def test_get_port_ip_router():
-    assert '10.0.0.1' == ip_utils.get_port_ip(
+    assert '10.0.0.1' == get_port_ip(
         lsp=Lsp(addresses=['router'], dynamic_addresses=None),
         lrp=Lrp(networks=['10.0.0.1/24']),
     )
@@ -57,17 +57,17 @@ def test_get_port_ip_router():
 
 def test_get_port_ip_empty():
     assert (
-        ip_utils.get_port_ip(lsp=Lsp(addresses=[], dynamic_addresses=None))
+        get_port_ip(lsp=Lsp(addresses=[], dynamic_addresses=None))
         is None
     )
 
 
 def test_ip_in_cidr():
-    assert ip_utils.ip_in_cidr('192.168.0.1', '192.168.0.0/24')
-    assert ip_utils.ip_in_cidr('192.168.0.1', '192.168.0.0/16')
-    assert ip_utils.ip_in_cidr('192.168.0.1', '0.0.0.0/0')
-    assert ip_utils.ip_in_cidr('192.168.0.1', '192.168.0.1/32')
-    assert not ip_utils.ip_in_cidr('192.168.0.1', '192.168.1.0/24')
+    assert ip_in_cidr('192.168.0.1', '192.168.0.0/24')
+    assert ip_in_cidr('192.168.0.1', '192.168.0.0/16')
+    assert ip_in_cidr('192.168.0.1', '0.0.0.0/0')
+    assert ip_in_cidr('192.168.0.1', '192.168.0.1/32')
+    assert not ip_in_cidr('192.168.0.1', '192.168.1.0/24')
 
 
 class Route(object):
@@ -89,7 +89,7 @@ def test_diff_routes():
         Route('1.1.4.0/24', '1.1.4.1'),
     ]
 
-    added, deleted = ip_utils.diff_routes(rest_routes, db_routes)
+    added, deleted = diff_routes(rest_routes, db_routes)
     assert len(added) == 2
     assert len(deleted) == 2
     assert rest_routes[0]['destination'] in added
@@ -99,8 +99,8 @@ def test_diff_routes():
 
 
 def test_diff_routes_all_empty():
-    assert ({}, {}) == ip_utils.diff_routes(None, None)
-    assert ({}, {}) == ip_utils.diff_routes([], [])
+    assert ({}, {}) == diff_routes(None, None)
+    assert ({}, {}) == diff_routes([], [])
 
 
 def test_diff_routes_only_new():
@@ -108,12 +108,12 @@ def test_diff_routes_only_new():
     assert (
         {route['destination']: route['nexthop']},
         {},
-    ) == ip_utils.diff_routes([route], [])
+    ) == diff_routes([route], [])
 
 
 def test_diff_routes_only_db():
     route = Route('1.1.2.0/24', '1.1.2.100')
-    assert ({}, {route.ip_prefix: route.nexthop}) == ip_utils.diff_routes(
+    assert ({}, {route.ip_prefix: route.nexthop}) == diff_routes(
         None, [route]
     )
 
@@ -127,7 +127,7 @@ def test_diff_routes_ipv6():
         Route('fd:20::/64', 'fd:20::1'),
     ]
 
-    added, deleted = ip_utils.diff_routes(rest_routes, db_routes)
+    added, deleted = diff_routes(rest_routes, db_routes)
     assert len(added) == 1
     assert len(deleted) == 1
     assert rest_routes[0]['destination'] in added
