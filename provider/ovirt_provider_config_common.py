@@ -17,67 +17,70 @@
 # Refer to the README and COPYING files for full details of the license
 from __future__ import absolute_import
 
-import provider.ovirt_provider_config as ovirt_provider_config
-from provider.ovirt_provider_config import CONFIG_SECTION_AUTH
-from provider.ovirt_provider_config import CONFIG_SECTION_DHCP
-from provider.ovirt_provider_config import CONFIG_SECTION_NETWORK
-from provider.ovirt_provider_config import CONFIG_SECTION_OVN_REMOTE
-from provider.ovirt_provider_config import CONFIG_SECTION_PROVIDER
-from provider.ovirt_provider_config import CONFIG_SECTION_SSL
-from provider.ovirt_provider_config import CONFIG_SECTION_VALIDATION
-from provider.ovirt_provider_config import DEFAULT_AUTH_PLUGIN
-from provider.ovirt_provider_config import DEFAULT_AUTH_TOKEN_TIMEOUT
-from provider.ovirt_provider_config import DEFAULT_DHCP_ENABLE_MTU
-from provider.ovirt_provider_config import DEFAULT_DHCP_LEASE_TIME
-from provider.ovirt_provider_config import DEFAULT_DHCP_MTU
-from provider.ovirt_provider_config import DEFAULT_DHCP_DEFAULT_IPV6_ADDRESS_MODE
-from provider.ovirt_provider_config import DEFAULT_DHCP_SERVER_MAC
-from provider.ovirt_provider_config import DEFAULT_KEYSTONE_PORT
-from provider.ovirt_provider_config import DEFAULT_NETWORK_PORT_SECURITY_ENABLED
-from provider.ovirt_provider_config import DEFAULT_NEUTRON_PORT
-from provider.ovirt_provider_config import DEFAULT_NOVA_PORT
-from provider.ovirt_provider_config import DEFAULT_OPENSTACK_KEYSTONE_ID
-from provider.ovirt_provider_config import DEFAULT_OPENSTACK_NEUTRON_ID
-from provider.ovirt_provider_config import DEFAULT_OPENSTACK_REGION
-from provider.ovirt_provider_config import DEFAULT_OPENSTACK_TENANT_DESCRIPTION
-from provider.ovirt_provider_config import DEFAULT_OPENSTACK_TENANT_ID
-from provider.ovirt_provider_config import DEFAULT_OPENSTACK_TENANT_NAME
-from provider.ovirt_provider_config import DEFAULT_OVN_REMOTE_AT_LOCALHOST
-from provider.ovirt_provider_config import DEFAULT_OVS_VERSION_29
-from provider.ovirt_provider_config import DEFAULT_PROVIDER_HOST
-from provider.ovirt_provider_config import DEFAULT_SSL_CERT_FILE
-from provider.ovirt_provider_config import DEFAULT_SSL_CIPHERS_STRING
-from provider.ovirt_provider_config import DEFAULT_SSL_ENABLED
-from provider.ovirt_provider_config import DEFAULT_SSL_KEY_FILE
-from provider.ovirt_provider_config import DEFAULT_URL_FILTER_EXCEPTION
-from provider.ovirt_provider_config import DEFAULT_VALIDATION_MAX_ALLOWED_MTU
-from provider.ovirt_provider_config import KEY_AUTH_PLUGIN
-from provider.ovirt_provider_config import KEY_AUTH_TOKEN_TIMEOUT
-from provider.ovirt_provider_config import KEY_DHCP_DEFAULT_IPV6_ADDRESS_MODE
-from provider.ovirt_provider_config import KEY_DHCP_ENABLE_MTU
-from provider.ovirt_provider_config import KEY_DHCP_LEASE_TIME
-from provider.ovirt_provider_config import KEY_DHCP_MTU
-from provider.ovirt_provider_config import KEY_DHCP_SERVER_MAC
-from provider.ovirt_provider_config import KEY_HTTPS_ENABLED
-from provider.ovirt_provider_config import KEY_KEYSTONE_PORT
-from provider.ovirt_provider_config import KEY_NETWORK_PORT_SECURITY_ENABLED
-from provider.ovirt_provider_config import KEY_NEUTRON_PORT
-from provider.ovirt_provider_config import KEY_NOVA_PORT
-from provider.ovirt_provider_config import KEY_OPENSTACK_KEYSTONE_ID
-from provider.ovirt_provider_config import KEY_OPENSTACK_NEUTRON_ID
-from provider.ovirt_provider_config import KEY_OPENSTACK_REGION
-from provider.ovirt_provider_config import KEY_OPENSTACK_TENANT_DESCRIPTION
-from provider.ovirt_provider_config import KEY_OPENSTACK_TENANT_ID
-from provider.ovirt_provider_config import KEY_OPENSTACK_TENANT_NAME
-from provider.ovirt_provider_config import KEY_OVN_REMOTE
-from provider.ovirt_provider_config import KEY_OVS_VERSION_29
-from provider.ovirt_provider_config import KEY_PROVIDER_HOST
-from provider.ovirt_provider_config import KEY_SSL_CACERT_FILE
-from provider.ovirt_provider_config import KEY_SSL_CERT_FILE
-from provider.ovirt_provider_config import KEY_SSL_CIPHERS_STRING
-from provider.ovirt_provider_config import KEY_SSL_KEY_FILE
-from provider.ovirt_provider_config import KEY_URL_FILTER_EXCEPTION
-from provider.ovirt_provider_config import KEY_VALIDATION_MAX_ALLOWED_MTU
+import provider.ovirt_provider_config \
+    as ovirt_provider_config
+from provider.ovirt_provider_config import (
+    CONFIG_SECTION_AUTH,
+    CONFIG_SECTION_DHCP,
+    CONFIG_SECTION_NETWORK,
+    CONFIG_SECTION_OVN_REMOTE,
+    CONFIG_SECTION_PROVIDER,
+    CONFIG_SECTION_SSL,
+    CONFIG_SECTION_VALIDATION,
+    DEFAULT_AUTH_PLUGIN,
+    DEFAULT_AUTH_TOKEN_TIMEOUT,
+    DEFAULT_DHCP_ENABLE_MTU,
+    DEFAULT_DHCP_LEASE_TIME,
+    DEFAULT_DHCP_MTU,
+    DEFAULT_DHCP_DEFAULT_IPV6_ADDRESS_MODE,
+    DEFAULT_DHCP_SERVER_MAC,
+    DEFAULT_KEYSTONE_PORT,
+    DEFAULT_NETWORK_PORT_SECURITY_ENABLED,
+    DEFAULT_NEUTRON_PORT,
+    DEFAULT_NOVA_PORT,
+    DEFAULT_OPENSTACK_KEYSTONE_ID,
+    DEFAULT_OPENSTACK_NEUTRON_ID,
+    DEFAULT_OPENSTACK_REGION,
+    DEFAULT_OPENSTACK_TENANT_DESCRIPTION,
+    DEFAULT_OPENSTACK_TENANT_ID,
+    DEFAULT_OPENSTACK_TENANT_NAME,
+    DEFAULT_OVN_REMOTE_AT_LOCALHOST,
+    DEFAULT_OVS_VERSION_29,
+    DEFAULT_PROVIDER_HOST,
+    DEFAULT_SSL_CERT_FILE,
+    DEFAULT_SSL_CIPHERS_STRING,
+    DEFAULT_SSL_ENABLED,
+    DEFAULT_SSL_KEY_FILE,
+    DEFAULT_URL_FILTER_EXCEPTION,
+    DEFAULT_VALIDATION_MAX_ALLOWED_MTU,
+    KEY_AUTH_PLUGIN,
+    KEY_AUTH_TOKEN_TIMEOUT,
+    KEY_DHCP_DEFAULT_IPV6_ADDRESS_MODE,
+    KEY_DHCP_ENABLE_MTU,
+    KEY_DHCP_LEASE_TIME,
+    KEY_DHCP_MTU,
+    KEY_DHCP_SERVER_MAC,
+    KEY_HTTPS_ENABLED,
+    KEY_KEYSTONE_PORT,
+    KEY_NETWORK_PORT_SECURITY_ENABLED,
+    KEY_NEUTRON_PORT,
+    KEY_NOVA_PORT,
+    KEY_OPENSTACK_KEYSTONE_ID,
+    KEY_OPENSTACK_NEUTRON_ID,
+    KEY_OPENSTACK_REGION,
+    KEY_OPENSTACK_TENANT_DESCRIPTION,
+    KEY_OPENSTACK_TENANT_ID,
+    KEY_OPENSTACK_TENANT_NAME,
+    KEY_OVN_REMOTE,
+    KEY_OVS_VERSION_29,
+    KEY_PROVIDER_HOST,
+    KEY_SSL_CACERT_FILE,
+    KEY_SSL_CERT_FILE,
+    KEY_SSL_CIPHERS_STRING,
+    KEY_SSL_KEY_FILE,
+    KEY_URL_FILTER_EXCEPTION,
+    KEY_VALIDATION_MAX_ALLOWED_MTU,
+)
 
 
 PROTOCOL_HTTP = 'http'

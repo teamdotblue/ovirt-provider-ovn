@@ -75,7 +75,8 @@ INFO = {
 
 class TestOvirtSso(object):
     def test_create_token_success(self, requests_mock):
-        requests_mock.register_uri("POST", TOKEN_URL, text=TOKEN_RESPONSE_SUCCESS)
+        requests_mock.register_uri(
+            "POST", TOKEN_URL, text=TOKEN_RESPONSE_SUCCESS)
         token = create_token(
             username=NOT_RELEVANT,
             password=NOT_RELEVANT,
@@ -110,7 +111,8 @@ class TestOvirtSso(object):
             )
 
     def test_get_profiles(self, requests_mock):
-        requests_mock.register_uri("POST", TOKEN_INFO_URL, text=PROFILES_LIST_RESPONSE)
+        requests_mock.register_uri(
+            "POST", TOKEN_INFO_URL, text=PROFILES_LIST_RESPONSE)
         profiles = get_profiles(
             token=TOKEN,
             engine_url=ENGINE_URL,
@@ -122,7 +124,8 @@ class TestOvirtSso(object):
         assert profiles == PROFILES
 
     def test_get_token_info(self, requests_mock):
-        requests_mock.register_uri("POST", TOKEN_INFO_URL, text=json.dumps(INFO))
+        requests_mock.register_uri(
+            "POST", TOKEN_INFO_URL, text=json.dumps(INFO))
         info = get_token_info(
             token=TOKEN,
             engine_url=ENGINE_URL,

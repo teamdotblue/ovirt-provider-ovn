@@ -29,6 +29,7 @@ from netaddr.core import AddrFormatError
 
 import provider.constants as ovnconst
 
+
 def get_port_ip(lsp, lrp=None):
     if not lsp.addresses:
         return None

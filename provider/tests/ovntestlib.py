@@ -112,7 +112,8 @@ class OvnPortRow(OvnRow):
     ):
         self.uuid = uuid
         self.name = name
-        self.external_ids = external_ids or {PortMapper.OVN_DEVICE_ID: device_id}
+        self.external_ids = external_ids \
+            or {PortMapper.OVN_DEVICE_ID: device_id}
         self.dhcpv4_options = None
         self.dhcpv6_options = None
         self.addresses = addresses or ["unknown"]
@@ -138,7 +139,8 @@ def assert_port_equal(rest_data, port):
         port.lsp, port.dhcp_options, port.lrp
     )
     assert rest_data.get("mac_address") == get_port_mac(port.lsp)
-    assert rest_data.get("port_security_enabled") == (len(port.lsp.port_security) > 0)
+    assert rest_data.get("port_security_enabled") == (
+        len(port.lsp.port_security) > 0)
 
 
 class OvnSubnetRow(OvnRow):
@@ -161,7 +163,8 @@ class OvnSubnetRow(OvnRow):
             SubnetMapper.OVN_IP_VERSION: str(ip_version),
         }
         self.options = options or {"dns_server": "8.8.8.8"}
-        if "router" not in self.options and ip_version == SubnetMapper.IP_VERSION_4:
+        if "router" not in self.options and ip_version == \
+              SubnetMapper.IP_VERSION_4:
             self.options["router"] = "1.1.1.1"
 
         self.external_ids[SubnetMapper.OVN_NETWORK_ID] = network_id or "0"
@@ -170,7 +173,8 @@ class OvnSubnetRow(OvnRow):
 def assert_subnet_equal(actual, subnet_row):
     assert actual["id"] == str(subnet_row.uuid)
     assert actual["cidr"] == subnet_row.cidr
-    assert actual.get("name") == subnet_row.external_ids.get(SubnetMapper.OVN_NAME)
+    assert actual.get("name") == subnet_row.external_ids.get(
+        SubnetMapper.OVN_NAME)
     assert actual["network_id"] == subnet_row.external_ids.get(
         SubnetMapper.OVN_NETWORK_ID
     )
@@ -182,7 +186,8 @@ def assert_subnet_equal(actual, subnet_row):
     actual_dns_nameservers = actual.get("dns_nameservers")
     if actual_dns_nameservers or ovn_dns_server:
         assert actual_dns_nameservers == ovn_dns_server
-    assert actual.get("gateway_ip") == subnet_row.options.get(SubnetMapper.OVN_GATEWAY)
+    assert actual.get("gateway_ip") == subnet_row.options.get(
+        SubnetMapper.OVN_GATEWAY)
     assert actual.get("allocation_pools")
 
 
@@ -329,7 +334,8 @@ def assert_security_group_rule_equal(rest_data, security_group_rule):
     )
     assert (
         rest_data[SecurityGroupRuleMapper.REST_SEC_GROUP_RULE_DIRECTION]
-        == neutron_constants.OVN_TO_API_DIRECTION_MAPPER[security_group_rule.direction]
+        == neutron_constants.OVN_TO_API_DIRECTION_MAPPER[
+            security_group_rule.direction]
     )
     assert (
         rest_data[SecurityGroupRuleMapper.REST_SEC_GROUP_RULE_SEC_GROUP_ID]
@@ -373,7 +379,8 @@ class ApiInputMaker(object):
         values to None.
         :return: a dict with all the non-null attributes key-value pairs
         """
-        return {v[0]: v[1] for (_, v) in self.__dict__.items() if v[1] is not None}
+        return {v[0]: v[1] for (_, v) in self.__dict__.items()
+                 if v[1] is not None}
 
 
 class NetworkApiInputMaker(ApiInputMaker):
@@ -455,7 +462,8 @@ class PortApiInputMaker(ApiInputMaker):
 
 
 class SecurityGroupApiInputMaker(ApiInputMaker):
-    def __init__(self, name, tenant_id=None, project_id=None, description=None):
+    def __init__(
+            self, name, tenant_id=None, project_id=None, description=None):
         self._name = (SecurityGroupMapper.REST_SEC_GROUP_NAME, name)
         self._description = (
             SecurityGroupMapper.REST_SEC_GROUP_NAME,

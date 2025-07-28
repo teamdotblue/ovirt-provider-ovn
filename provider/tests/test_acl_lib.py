@@ -86,12 +86,14 @@ def test_acl_port_matches():
 
 def test_create_acl_match():
     pg_id = uuid.UUID(int=100)
-    assert create_acl_match("ingress", "IPv4", None, None, None, "tcp", pg_id) == [
+    assert create_acl_match(
+        "ingress", "IPv4", None, None, None, "tcp", pg_id) == [
         "outport == @00000000-0000-0000-0000-000000000064",
         "ip4",
         "tcp",
     ]
-    assert create_acl_match("ingress", "IPv4", None, 5000, 5299, "tcp", pg_id) == [
+    assert create_acl_match(
+        "ingress", "IPv4", None, 5000, 5299, "tcp", pg_id) == [
         "outport == @00000000-0000-0000-0000-000000000064",
         "ip4",
         "tcp",
@@ -147,7 +149,8 @@ def test_create_acl_match_output():
         "tcp && tcp.dst >= 5000 && tcp.dst <= 5299"
     )
     assert create_acl_match_string(
-        create_acl_match("ingress", "IPv4", "192.168.80.0/24", 5000, 5299, "tcp", pg_id)
+        create_acl_match(
+            "ingress", "IPv4", "192.168.80.0/24", 5000, 5299, "tcp", pg_id)
     ) == (
         "outport == @00000000-0000-0000-0000-000000000064 && ip4 && "
         "ip4.src == 192.168.80.0/24 && tcp && tcp.dst >= 5000 && "
