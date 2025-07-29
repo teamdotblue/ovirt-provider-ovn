@@ -51,13 +51,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag: [ el9stream, el10stream ]
+        tag: [ centos-9, centos-10 ]
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           sudo apt remove -y python3-packaging
           sudo apt install podman python3-pip
+      - name: Build container image
+        run: |
+          podman build -t ovirt-provider-ovn:${{ matrix.tag}} -f automation/containers/ovirt-provider-ovn/Dockerfile.${{matrix.tag}} .
       - name: Run integration tests
         run: sudo -E ./automation/create_it_env.sh
       - uses: actions/upload-artifact@v4

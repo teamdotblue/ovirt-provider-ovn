@@ -7,8 +7,8 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 EXPORTED_ARTIFACTS_DIR="${EXPORT_DIR:=exported-artifacts}"
 
 IMAGE_TAG="${IMAGE_TAG:=centos-8}"
-OVN_CONTROLLER_IMG="${CONTROLLER_IMG:="quay.io/ovirt/buildcontainer"}"
-OVIRT_PROVIDER_OVN_IMG="${PROVIDER_IMG:="quay.io/ovirt/buildcontainer"}"
+OVN_CONTROLLER_IMG="${CONTROLLER_IMG:="localhost/ovirt-provider-ovn"}"
+OVIRT_PROVIDER_OVN_IMG="${PROVIDER_IMG:="localhost/ovirt-provider-ovn"}"
 
 PROVIDER_PATH="$PROJECT_ROOT"/provider
 CONTAINER_SRC_CODE_PATH="/ovirt-provider-ovn"
@@ -74,14 +74,7 @@ function start_controller_container {
 
 function create_rpms {
   cleanup_past_builds
-  container_exec "$PROVIDER_ID" "dnf remove -y python3-packaging python3-chardet"
-  container_exec "$PROVIDER_ID" "python3 -m pip install --upgrade pip"
-  container_exec "$PROVIDER_ID" "python3 -m pip install tox mock netaddr==0.7.19 ovsdbapp requests_mock packaging ansible-runner ansible hooking"
-  container_exec "$PROVIDER_ID" "dnf install -y epel-release"
-  container_exec "$PROVIDER_ID" "dnf install -y rpm-build"
-  container_exec "$PROVIDER_ID" "dnf install -y https://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm"
   container_exec "$PROVIDER_ID" "touch /var/log/ovirt-provider-ovn.log"
-  container_exec "$PROVIDER_ID" "git config --global --add safe.directory /ovirt-provider-ovn"
   container_exec "$PROVIDER_ID" "
     cd $CONTAINER_SRC_CODE_PATH && \
     make rpm
