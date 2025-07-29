@@ -55,7 +55,7 @@ function start_provider_container {
 	  -v $PROJECT_ROOT/:$CONTAINER_SRC_CODE_PATH \
 	  -v /lib/modules/$kernel_version:/lib/modules/$kernel_version:ro \
 	  -p 9696:9696 -p 35357:35357 \
-    $OVIRT_PROVIDER_OVN_IMG:$IMAGE_TAG
+    $OVIRT_PROVIDER_OVN_IMG:$IMAGE_TAG sleep infinity
   )"
   enable_ipv6 "$PROVIDER_ID"
   PROVIDER_IP="$(container_ip $PROVIDER_ID)"
