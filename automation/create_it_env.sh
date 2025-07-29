@@ -7,8 +7,8 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 EXPORTED_ARTIFACTS_DIR="${EXPORT_DIR:=exported-artifacts}"
 
 IMAGE_TAG="${IMAGE_TAG:=centos-8}"
-OVN_CONTROLLER_IMG="${CONTROLLER_IMG:=ovirt/ovn-controller}"
-OVIRT_PROVIDER_OVN_IMG="${PROVIDER_IMG:=ovirt/ovirt-provider-ovn}"
+OVN_CONTROLLER_IMG="${CONTROLLER_IMG:="quay.io/ovirt/buildcontainer"}"
+OVIRT_PROVIDER_OVN_IMG="${PROVIDER_IMG:="quay.io/ovirt/buildcontainer"}"
 
 PROVIDER_PATH="$PROJECT_ROOT"/provider
 CONTAINER_SRC_CODE_PATH="/ovirt-provider-ovn"

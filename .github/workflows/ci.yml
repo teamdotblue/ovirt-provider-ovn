@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tag: [ centos-9, centos-10 ]
+        tag: [ el9stream, el10stream ]
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
