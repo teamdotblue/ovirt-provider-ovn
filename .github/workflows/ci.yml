@@ -6,6 +6,7 @@ on:
 
 env:
   EXPORT_DIR: exported-artifacts
+  PYTHONPATH: ${{ github.workspace }}
 jobs:
   check:
     runs-on: ubuntu-latest
