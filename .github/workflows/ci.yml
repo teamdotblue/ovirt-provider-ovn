@@ -29,7 +29,7 @@ jobs:
       run: dnf install -y python3
 
     - name: Install python dependencies
-      run: python3 -m pip install tox mock netaddr==0.7.19 ovsdbapp requests_mock
+      run: python3 -m pip install tox mock netaddr==0.7.19 ovsdbapp requests_mock pytest
 
     - name: Run check
       run: make check
