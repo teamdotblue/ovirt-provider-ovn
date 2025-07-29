@@ -74,7 +74,7 @@ function start_controller_container {
 
 function create_rpms {
   cleanup_past_builds
-  container_exec "$PROVIDER_ID" "dnf remove -y python3-packaging"
+  container_exec "$PROVIDER_ID" "dnf remove -y python3-packaging python3-chardet"
   container_exec "$PROVIDER_ID" "python3 -m pip install --upgrade pip"
   container_exec "$PROVIDER_ID" "python3 -m pip install tox mock netaddr==0.7.19 ovsdbapp requests_mock packaging ansible-runner ansible hooking"
   container_exec "$PROVIDER_ID" "dnf install -y epel-release"
