@@ -74,6 +74,10 @@ function start_controller_container {
 
 function create_rpms {
   cleanup_past_builds
+  container_exec "$PROVIDER_ID" "python3 -m pip install --upgrade pip"
+  container_exec "$PROVIDER_ID" "python3 -m pip install -r $CONTAINER_SRC_CODE_PATH/requirements.txt"
+  container_exec "$PROVIDER_ID" "dnf install -y epel-release"
+  container_exec "$PROVIDER_ID" "dnf install -y https://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm"
   container_exec "$PROVIDER_ID" "touch /var/log/ovirt-provider-ovn.log"
   container_exec "$PROVIDER_ID" "
     cd $CONTAINER_SRC_CODE_PATH && \
