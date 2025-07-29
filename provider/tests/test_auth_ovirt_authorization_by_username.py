@@ -32,7 +32,7 @@ INFO_INVALID = {'user_id': 'user@internal', 'active': True}
 
 
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_username.get_token_info',
+    'provider.auth.plugins.ovirt.authorization_by_username.get_token_info',
     return_value=INFO_VALID,
     autospec=True,
 )
@@ -50,7 +50,7 @@ def test_validate_token_success(mock_get_token_info):
 
 
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_username.get_token_info',
+    'provider.auth.plugins.ovirt.authorization_by_username.get_token_info',
     return_value=INFO_INVALID,
     autospec=True,
 )

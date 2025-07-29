@@ -86,12 +86,12 @@ def provider_config_get(section, key, default):
 
 
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_group.get_token_info',
+    'provider.auth.plugins.ovirt.authorization_by_group.get_token_info',
     return_value=INFO_VALID,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_group.ovirt_provider_config.get',
+    'provider.auth.plugins.ovirt.authorization_by_group.ovirt_provider_config.get',
     side_effect=provider_config_get,
     autospec=True,
 )
@@ -109,12 +109,12 @@ def test_validate_token_success(mock_provider_config_get, mock_get_token_info):
 
 
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_group.get_token_info',
+    'provider.auth.plugins.ovirt.authorization_by_group.get_token_info',
     return_value=INFO_INVALID,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_group.ovirt_provider_config.get',
+    'provider.auth.plugins.ovirt.authorization_by_group.ovirt_provider_config.get',
     side_effect=provider_config_get,
     autospec=True,
 )

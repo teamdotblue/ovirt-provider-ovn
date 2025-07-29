@@ -72,11 +72,17 @@ def timeout_producer(content, id):
     raise Timeout()
 
 
-@mock.patch('handlers.keystone.TokenHandler._run_server', lambda *args: None)
-@mock.patch('handlers.keystone_responses._responses', response_handlers)
-@mock.patch('handlers.keystone.TokenHandler.end_headers')
-@mock.patch('handlers.keystone.TokenHandler.send_header')
-@mock.patch('handlers.keystone.TokenHandler.send_response', autospec=True)
+@mock.patch(
+    'provider.handlers.keystone.TokenHandler._run_server', lambda *args: None
+)
+@mock.patch(
+    'provider.handlers.keystone_responses._responses', response_handlers
+)
+@mock.patch('provider.handlers.keystone.TokenHandler.end_headers')
+@mock.patch('provider.handlers.keystone.TokenHandler.send_header')
+@mock.patch(
+    'provider.handlers.keystone.TokenHandler.send_response', autospec=True
+)
 class TestKeystoneHandler(object):
     def _test_handle_post_request_ok(
         self, mock_send_response, path, expected_string
@@ -133,7 +139,9 @@ class TestKeystoneHandler(object):
 
         self._test_handle_post_request_ok(mock_send_response, path, values)
 
-    @mock.patch('handlers.keystone.TokenHandler.send_error', autospec=True)
+    @mock.patch(
+        'provider.handlers.keystone.TokenHandler.send_error', autospec=True
+    )
     def test_handle_post_request_timeout(
         self,
         mock_send_error,
@@ -144,7 +152,9 @@ class TestKeystoneHandler(object):
         self._test_handle_post_request('/v2.0/timeout')
         self._assert_send_error_correctly_called(mock_send_error, 504)
 
-    @mock.patch('handlers.keystone.TokenHandler.send_error', autospec=True)
+    @mock.patch(
+        'provider.handlers.keystone.TokenHandler.send_error', autospec=True
+    )
     def test_handle_get_request_not_allowed(
         self,
         mock_send_error,
@@ -155,7 +165,9 @@ class TestKeystoneHandler(object):
         self._test_handle_get_request('/v2.0/tokens')
         self._assert_send_error_correctly_called(mock_send_error, 405)
 
-    @mock.patch('handlers.keystone.TokenHandler.send_error', autospec=True)
+    @mock.patch(
+        'provider.handlers.keystone.TokenHandler.send_error', autospec=True
+    )
     def test_handle_post_request_not_found(
         self,
         mock_send_error,
@@ -166,7 +178,9 @@ class TestKeystoneHandler(object):
         self._test_handle_post_request('/v2/garbage')
         self._assert_send_error_correctly_called(mock_send_error, 404)
 
-    @mock.patch('handlers.keystone.TokenHandler.send_error', autospec=True)
+    @mock.patch(
+        'provider.handlers.keystone.TokenHandler.send_error', autospec=True
+    )
     def test_handle_post_request_bad_req(
         self,
         mock_send_error,

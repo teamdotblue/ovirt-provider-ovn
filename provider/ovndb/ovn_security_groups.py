@@ -20,7 +20,7 @@
 from __future__ import absolute_import
 
 import uuid
-from datetime import datetime
+import datetime
 from functools import wraps
 
 from ovsdbapp.backend.ovs_idl.idlutils import RowNotFound
@@ -58,7 +58,7 @@ class OvnSecurityGroupApi(object):
     def create_security_group(
         self, name, project_id=None, tenant_id=None, description=None
     ):
-        now = datetime.utcnow().isoformat()
+        now = datetime.datetime.utcnow().isoformat()
         pg_name = self._generate_name_when_required(name)
         external_ids = {
             SecurityGroupMapper.OVN_SECURITY_GROUP_CREATE_TS: now,
@@ -96,7 +96,7 @@ class OvnSecurityGroupApi(object):
             raise SecurityGroupException(
                 'Updating default security group not allowed.'
             )
-        now = datetime.utcnow().isoformat()
+        now = datetime.datetime.utcnow().isoformat()
         external_ids = sec_group.external_ids
 
         external_ids[SecurityGroupMapper.OVN_SECURITY_GROUP_UPDATE_TS] = now

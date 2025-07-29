@@ -43,10 +43,12 @@ TOKEN_REQUEST = json.dumps(
 
 
 @mock.patch(
-    'handlers.keystone_responses.auth.validate_token', return_value=True
+    'provider.handlers.keystone_responses.auth.validate_token',
+    return_value=True,
 )
 @mock.patch(
-    'handlers.keystone_responses.auth.create_token', return_value=TOKEN
+    'provider.handlers.keystone_responses.auth.create_token',
+    return_value=TOKEN,
 )
 def test_post_tokens(mock_create_token, validate_token):
     handler, parameters = SelectingHandler.get_response_handler(

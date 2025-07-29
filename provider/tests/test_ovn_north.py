@@ -578,6 +578,7 @@ class TestOvnNorth(object):
                     NetworkMapper.REST_MTU: str(new_mtu),
                 },
             ),
+            if_exists=True,
         )
         expected_network_mtu_update = mock.call(
             ovn_north.idl,
@@ -587,6 +588,7 @@ class TestOvnNorth(object):
                 ovnconst.ROW_DHCP_OPTIONS,
                 {SubnetMapper.OVN_DHCP_MTU: str(new_mtu)},
             ),
+            if_exists=True,
         )
         assert expected_external_ids_update in mock_dbset_command.mock_calls
         assert expected_network_mtu_update in mock_dbset_command.mock_calls
@@ -624,6 +626,7 @@ class TestOvnNorth(object):
                     )
                 },
             ),
+            if_exists=True,
         )
 
     @mock.patch(
@@ -667,6 +670,7 @@ class TestOvnNorth(object):
                     )
                 },
             ),
+            if_exists=True,
         )
 
     @mock.patch(
@@ -725,7 +729,7 @@ class TestOvnNorth(object):
     @mock.patch(
         'ovsdbapp.backend.ovs_idl.command.DbSetCommand', autospec=False
     )
-    @mock.patch('neutron.neutron_api.ovs_version_29', lambda: True)
+    @mock.patch('provider.neutron.neutron_api.ovs_version_29', lambda: True)
     def test_add_port(self, mock_db_set, mock_add_command, mock_connection):
         mock_add_command.return_value.execute.return_value = (
             TestOvnNorth.PORT_1
@@ -798,6 +802,7 @@ class TestOvnNorth(object):
                         PortMapper.OVN_REQUESTED_CHASSIS: TestOvnNorth.PORT_BINDING_ID  # noqa: E501
                     },
                 ),
+                if_exists=True,
             )
             in mock_db_set.mock_calls
         )
@@ -817,6 +822,7 @@ class TestOvnNorth(object):
                         )
                     ],
                 ),
+                if_exists=True,
             )
             in mock_db_set.mock_calls
         )
@@ -848,7 +854,7 @@ class TestOvnNorth(object):
     @mock.patch(
         'ovsdbapp.backend.ovs_idl.command.DbSetCommand', autospec=False
     )
-    @mock.patch('neutron.neutron_api.ovs_version_29', lambda: True)
+    @mock.patch('provider.neutron.neutron_api.ovs_version_29', lambda: True)
     def test_add_port_subnet(
         self,
         mock_db_set,
@@ -1098,6 +1104,7 @@ class TestOvnNorth(object):
                 ovnconst.ROW_LS_OTHER_CONFIG,
                 {NetworkMapper.OVN_SUBNET: TestOvnNorth.SUBNET_CIDR},
             ),
+            if_exists=True,
         )
         assert mock_dbset_command.mock_calls[0] == expected_dbset_call
 

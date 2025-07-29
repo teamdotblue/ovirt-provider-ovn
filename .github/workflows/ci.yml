@@ -28,8 +28,8 @@ jobs:
     - name: Install dependencies
       run: dnf install -y python3
 
-    - name: Install tox
-      run: python3 -m pip install tox mock netaddr ovsdbapp requests_mock
+    - name: Install python dependencies
+      run: python3 -m pip install tox mock netaddr==0.7.19 ovsdbapp requests_mock
 
     - name: Run check
       run: make check
@@ -58,7 +58,7 @@ jobs:
         run: |
           sudo apt remove -y python3-packaging
           sudo apt install podman python3-pip
-          sudo python3 -m pip install tox mock netaddr ovsdbapp requests_mock packaging
+          sudo python3 -m pip install tox mock netaddr==0.7.19 ovsdbapp requests_mock packaging ansible-runner ansible hooking
       - name: Run integration tests
         run: sudo -E ./automation/create_it_env.sh
       - uses: actions/upload-artifact@v4

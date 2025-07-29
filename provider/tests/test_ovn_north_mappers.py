@@ -18,7 +18,7 @@
 from __future__ import absolute_import
 
 from uuid import UUID
-from datetime import datetime
+import datetime
 
 import pytest
 
@@ -153,7 +153,7 @@ class TestOvnNorthMappers(object):
     def test_port_to_rest_mac_address(self):
         port_data = OvnPortRow(
             PORT_UUID,
-            addresses=MAC_ADDRESS,
+            addresses=[MAC_ADDRESS],
             name=PORT_NAME,
             external_ids={
                 PortMapper.OVN_NIC_NAME: PORT_NAME,
@@ -237,7 +237,7 @@ class TestOvnNorthMappers(object):
     def test_acl_to_rest_minimal(self):
         name = str(SECURITY_GROUP_UUID)
         desc = 'lotsofsafety'
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.datetime.utcnow().isoformat()
         external_ids = {
             SecurityGroupMapper.OVN_SECURITY_GROUP_DESCRIPTION: desc,
             SecurityGroupMapper.OVN_SECURITY_GROUP_CREATE_TS: timestamp,
@@ -260,7 +260,7 @@ class TestOvnNorthMappers(object):
 
         name = str(SECURITY_GROUP_UUID)
         desc = 'lotsofsafety'
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.datetime.utcnow().isoformat()
         external_ids = {
             SecurityGroupMapper.OVN_SECURITY_GROUP_DESCRIPTION: desc,
             SecurityGroupMapper.OVN_SECURITY_GROUP_CREATE_TS: timestamp,
@@ -300,7 +300,7 @@ class TestOvnNorthMappers(object):
     def test_port_group_to_rest_with_rules(self):
         name = str(SECURITY_GROUP_UUID)
         desc = 'lotsofsafety'
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.datetime.utcnow().isoformat()
         external_ids = {
             SecurityGroupMapper.OVN_SECURITY_GROUP_DESCRIPTION: desc,
             SecurityGroupMapper.OVN_SECURITY_GROUP_CREATE_TS: timestamp,

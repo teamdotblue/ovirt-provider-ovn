@@ -63,14 +63,20 @@ def response_code_201(nb_db, content, path_parts):
     )
 
 
-@mock.patch('handlers.neutron.NeutronHandler._run_server', lambda *args: None)
-@mock.patch('handlers.neutron_responses._responses', response_handlers)
+@mock.patch(
+    'provider.handlers.neutron.NeutronHandler._run_server', lambda *args: None
+)
+@mock.patch(
+    'provider.handlers.neutron_responses._responses', response_handlers
+)
 class TestNeutronHandler(object):
-    @mock.patch('handlers.neutron.NeutronApi', autospec=True)
-    @mock.patch('handlers.neutron.NeutronHandler.end_headers')
-    @mock.patch('handlers.neutron.NeutronHandler.send_header')
-    @mock.patch('handlers.neutron.NeutronHandler.send_response', autospec=True)
-    @mock.patch('handlers.neutron.validate_token', return_value=True)
+    @mock.patch('provider.handlers.neutron.NeutronApi', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.end_headers')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_header')
+    @mock.patch(
+        'provider.handlers.neutron.NeutronHandler.send_response', autospec=True
+    )
+    @mock.patch('provider.handlers.neutron.validate_token', return_value=True)
     def test_handle_get_request(
         self,
         mock_validate_token,
@@ -94,9 +100,9 @@ class TestNeutronHandler(object):
         assert mock_send_response.call_count == 1
         assert mock_validate_token.call_count == 1
 
-    @mock.patch('handlers.neutron.validate_token', return_value=False)
-    @mock.patch('handlers.neutron.NeutronHandler.log_error')
-    @mock.patch('handlers.neutron.NeutronHandler.send_error')
+    @mock.patch('provider.handlers.neutron.validate_token', return_value=False)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.log_error')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_error')
     def test_handle_get_request_auth_fail(
         self, mock_send_error, mock_log_error, mock_validate_token
     ):
@@ -112,11 +118,13 @@ class TestNeutronHandler(object):
         assert mock_validate_token.call_count == 1
         assert mock_send_error.call_args[0][0] == 403
 
-    @mock.patch('handlers.neutron.NeutronApi', autospec=True)
-    @mock.patch('handlers.neutron.NeutronHandler.end_headers')
-    @mock.patch('handlers.neutron.NeutronHandler.send_header')
-    @mock.patch('handlers.neutron.NeutronHandler.send_response', autospec=True)
-    @mock.patch('handlers.neutron.validate_token', return_value=True)
+    @mock.patch('provider.handlers.neutron.NeutronApi', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.end_headers')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_header')
+    @mock.patch(
+        'provider.handlers.neutron.NeutronHandler.send_response', autospec=True
+    )
+    @mock.patch('provider.handlers.neutron.validate_token', return_value=True)
     def test_handle_get_request_with_id(
         self,
         mock_validate_token,
@@ -143,11 +151,13 @@ class TestNeutronHandler(object):
         assert mock_send_response.call_count == 1
         assert mock_validate_token.call_count == 1
 
-    @mock.patch('handlers.neutron.NeutronApi', autospec=True)
-    @mock.patch('handlers.neutron.NeutronHandler.end_headers')
-    @mock.patch('handlers.neutron.NeutronHandler.send_header')
-    @mock.patch('handlers.neutron.NeutronHandler.send_response', autospec=True)
-    @mock.patch('handlers.neutron.validate_token', return_value=True)
+    @mock.patch('provider.handlers.neutron.NeutronApi', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.end_headers')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_header')
+    @mock.patch(
+        'provider.handlers.neutron.NeutronHandler.send_response', autospec=True
+    )
+    @mock.patch('provider.handlers.neutron.validate_token', return_value=True)
     def test_handle_delete_request(
         self,
         mock_validate_token,
@@ -171,11 +181,13 @@ class TestNeutronHandler(object):
         assert mock_send_response.call_count == 1
         assert mock_validate_token.call_count == 1
 
-    @mock.patch('handlers.neutron.NeutronApi', autospec=True)
-    @mock.patch('handlers.neutron.NeutronHandler.end_headers')
-    @mock.patch('handlers.neutron.NeutronHandler.send_header')
-    @mock.patch('handlers.neutron.NeutronHandler.send_error')
-    @mock.patch('handlers.neutron.NeutronHandler.send_response', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronApi', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.end_headers')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_header')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_error')
+    @mock.patch(
+        'provider.handlers.neutron.NeutronHandler.send_response', autospec=True
+    )
     def test_handle_delete_with_no_id(
         self,
         mock_send_response,
@@ -193,11 +205,13 @@ class TestNeutronHandler(object):
         assert send_error.call_count == 1
         assert send_error.call_args[0][0] == http.client.METHOD_NOT_ALLOWED
 
-    @mock.patch('handlers.neutron.NeutronApi', autospec=True)
-    @mock.patch('handlers.neutron.NeutronHandler.end_headers')
-    @mock.patch('handlers.neutron.NeutronHandler.send_header')
-    @mock.patch('handlers.neutron.NeutronHandler.send_response', autospec=True)
-    @mock.patch('handlers.neutron.validate_token', return_value=True)
+    @mock.patch('provider.handlers.neutron.NeutronApi', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.end_headers')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_header')
+    @mock.patch(
+        'provider.handlers.neutron.NeutronHandler.send_response', autospec=True
+    )
+    @mock.patch('provider.handlers.neutron.validate_token', return_value=True)
     def test_handle_post_request(
         self,
         mock_validate_token,
@@ -226,11 +240,13 @@ class TestNeutronHandler(object):
         assert mock_send_response.call_count == 1
         assert mock_validate_token.call_count == 1
 
-    @mock.patch('handlers.neutron.NeutronApi', autospec=True)
-    @mock.patch('handlers.neutron.NeutronHandler.end_headers')
-    @mock.patch('handlers.neutron.NeutronHandler.send_header')
-    @mock.patch('handlers.neutron.NeutronHandler.send_response', autospec=True)
-    @mock.patch('handlers.neutron.validate_token', return_value=True)
+    @mock.patch('provider.handlers.neutron.NeutronApi', autospec=True)
+    @mock.patch('provider.handlers.neutron.NeutronHandler.end_headers')
+    @mock.patch('provider.handlers.neutron.NeutronHandler.send_header')
+    @mock.patch(
+        'provider.handlers.neutron.NeutronHandler.send_response', autospec=True
+    )
+    @mock.patch('provider.handlers.neutron.validate_token', return_value=True)
     def test_response_code_201(
         self,
         mock_validate_token,

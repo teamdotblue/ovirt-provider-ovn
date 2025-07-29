@@ -59,22 +59,22 @@ ROLES_INVALID = [ROLE_0]
 
 
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.get_token_info',
+    'provider.auth.plugins.ovirt.authorization_by_role.get_token_info',
     return_value=INFO,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.get_profiles',
+    'provider.auth.plugins.ovirt.authorization_by_role.get_profiles',
     return_value=PROFILES,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.search_request',
+    'provider.auth.plugins.ovirt.authorization_by_role.search_request',
     return_value=USERS,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.follow_link',
+    'provider.auth.plugins.ovirt.authorization_by_role.follow_link',
     return_value=ROLES_VALID,
     autospec=True,
 )
@@ -103,22 +103,22 @@ def test_validate_token_success(
 
 
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.get_token_info',
+    'provider.auth.plugins.ovirt.authorization_by_role.get_token_info',
     return_value=INFO,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.get_profiles',
+    'provider.auth.plugins.ovirt.authorization_by_role.get_profiles',
     return_value=PROFILES,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.search_request',
+    'provider.auth.plugins.ovirt.authorization_by_role.search_request',
     return_value=USERS,
     autospec=True,
 )
 @mock.patch(
-    'auth.plugins.ovirt.authorization_by_role.follow_link',
+    'provider.auth.plugins.ovirt.authorization_by_role.follow_link',
     return_value=ROLES_INVALID,
     autospec=True,
 )
