@@ -21,6 +21,7 @@ RUN dnf -y install yum-plugin-copr \
     dnf install -y systemd \
     && \
     dnf install -y \
+        python3-pip \
         git \
         kernel \
         make \
@@ -34,6 +35,8 @@ RUN dnf -y install yum-plugin-copr \
     dnf clean all \
     && \
     mkdir -p /etc/ovirt-provider-ovn/conf.d/
+
+RUN python3 -m pip install tox
 
 COPY automation/containers/ovirt-provider-ovn/10-integrationtest.conf /etc/ovirt-provider-ovn/conf.d/
 
