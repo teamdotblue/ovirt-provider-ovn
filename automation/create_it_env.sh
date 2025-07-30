@@ -7,7 +7,7 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 EXPORTED_ARTIFACTS_DIR="${EXPORT_DIR:=exported-artifacts}"
 
 IMAGE_TAG="${IMAGE_TAG:=centos-8}"
-OVN_CONTROLLER_IMG="${CONTROLLER_IMG:="localhost/ovirt-provider-ovn"}"
+OVN_CONTROLLER_IMG="${CONTROLLER_IMG:="localhost/ovirt-provider-ovn-controller"}"
 OVIRT_PROVIDER_OVN_IMG="${PROVIDER_IMG:="localhost/ovirt-provider-ovn"}"
 
 PROVIDER_PATH="$PROJECT_ROOT"/provider

@@ -35,11 +35,11 @@ RUN dnf -y install yum-plugin-copr \
     && \
     mkdir -p /etc/ovirt-provider-ovn/conf.d/
 
-COPY 10-integrationtest.conf /etc/ovirt-provider-ovn/conf.d/
+COPY automation/containers/ovirt-provider-ovn/10-integrationtest.conf /etc/ovirt-provider-ovn/conf.d/
 
-COPY ovn-northd.conf /etc/sysconfig/ovn-northd
+COPY automation/containers/ovirt-provider-ovn/ovn-northd.conf /etc/sysconfig/ovn-northd
 
-COPY boot-northd.sh /boot-northd.sh
+COPY automation/containers/ovirt-provider-ovn/boot-northd.sh /boot-northd.sh
 
 VOLUME ["/ovirt-provider-ovn-rpms"]
 
