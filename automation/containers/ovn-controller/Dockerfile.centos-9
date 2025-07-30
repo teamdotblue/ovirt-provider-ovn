@@ -39,4 +39,7 @@ COPY automation/containers/ovn-controller/ovn-controller.conf /etc/sysconfig/ovn
 
 COPY automation/containers/ovn-controller/boot-controller.sh /boot-controller.sh
 
+COPY driver/scripts/setup_ovn_controller.sh /setup_ovn_controller.sh
+RUN chmod +x /setup_ovn_controller.sh
+
 CMD ["/usr/sbin/init"]
