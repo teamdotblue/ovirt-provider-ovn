@@ -1,0 +1,7 @@
+{
+    "name": "oVirt",
+    "build": {
+      "context": "..",
+      "dockerfile": "../automation/containers/ovn-controller/Dockerfile.centos-9"
+    }
+}
