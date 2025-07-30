@@ -87,6 +87,5 @@
     - [ 'autoconf', 'accept_ra', 'accept_redirects' ,'accept_ra_pinfo' ]
 
 - name: stop tcpdump captures
-  include: stop_tcpdump_debug.yml
-  when:
-    - debug_icmpv6
+  include_tasks: stop_tcpdump_debug.yml
+  when: debug_icmpv6
