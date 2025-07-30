@@ -32,7 +32,7 @@ RUN dnf -y install yum-plugin-copr \
     && \
     dnf clean all
 
-RUN python3 -m pip install tox
+RUN python3 -m pip install mock netaddr==0.7.19 ovsdbapp requests_mock pytest
 
 
 COPY automation/containers/ovn-controller/ovn-controller.conf /etc/sysconfig/ovn-controller
