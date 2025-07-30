@@ -9,5 +9,7 @@ ovs-vsctl --retry --timeout=2 --no-wait set Open_vSwitch . \
 	external_ids:ovn-encap-ip=`hostname -I` \
 	external_ids:ovn-encap-type=geneve
 
+ovs-vsctl --may-exist add-br br-int
+
 echo "Start ovn-controller ..."
 systemctl start ovn-controller
