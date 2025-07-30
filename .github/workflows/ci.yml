@@ -58,7 +58,7 @@ jobs:
         run: |
           sudo apt remove -y python3-packaging
           sudo apt install podman python3-pip
-          sudo python3 -m pip install tox
+          sudo python3 -m pip install tox netaddr==0.7.19 ovsdbapp
       - name: Build provider container image
         run: |
           sudo podman build -t ovirt-provider-ovn:${{ matrix.tag}} -f automation/containers/ovirt-provider-ovn/Dockerfile.${{matrix.tag}} .
