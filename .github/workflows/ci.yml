@@ -60,7 +60,9 @@ jobs:
           sudo apt install podman python3-pip
       - name: Build container image
         run: |
-          podman build -t ovirt-provider-ovn:${{ matrix.tag}} -f automation/containers/ovirt-provider-ovn/Dockerfile.${{matrix.tag}} .
+          sudo podman build -t ovirt-provider-ovn:${{ matrix.tag}} -f automation/containers/ovirt-provider-ovn/Dockerfile.${{matrix.tag}} .
+      - name: check build images
+        run: podman images
       - name: Run integration tests
         run: sudo -E ./automation/create_it_env.sh
       - uses: actions/upload-artifact@v4
